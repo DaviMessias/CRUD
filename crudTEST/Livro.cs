@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace crudTEST
 {
-
-
+  
     public class Livro
     {
+        public int Id { get; set; }
         public string Nome { get; set; }
         public string Autor { get; set; }
         public string Data { get; set; }
@@ -19,11 +19,17 @@ namespace crudTEST
 
         public Livro(string nome, string autor, string data, string editora)
         {
-         Nome = nome;
-         Autor = autor;
-         Data = data;
-         Editora = editora;
+            this. Nome = nome;
+            this.Autor = autor;
+            this. Data = data;
+            this.Editora = editora;
+            
+           
         }
-      
+        public Livro()
+        {
+
+        }
+        
     }
 }

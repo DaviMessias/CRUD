@@ -46,6 +46,7 @@
             this.txtNome.Name = "txtNome";
             this.txtNome.Size = new System.Drawing.Size(146, 27);
             this.txtNome.TabIndex = 0;
+            this.txtNome.TextChanged += new System.EventHandler(this.txtNome_TextChanged);
             // 
             // txtAutor
             // 
@@ -149,9 +150,6 @@
         }
 
         #endregion
-        private TextBox txtAutor;
-        private TextBox txtData;
-        private TextBox txtEditora;
         private Label label1;
         private Label label2;
         private Label label3;
@@ -159,5 +157,8 @@
         private Button btnSalvar;
         private Button btnEditar;
         public TextBox txtNome;
+        public TextBox txtAutor;
+        public TextBox txtData;
+        public TextBox txtEditora;
     }
 }

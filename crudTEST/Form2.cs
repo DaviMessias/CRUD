@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -12,6 +13,7 @@ namespace crudTEST
 {
     public partial class Form2 : Form
     {
+       // public int Id { get; set; }
         public string Nome { get; set; }
         public string Autor { get; set; }
         public string Data { get; set; }
@@ -36,28 +38,53 @@ namespace crudTEST
             this.Autor = txtAutor.Text;
             this.Data = txtData.Text;
             this.Editora = txtEditora.Text;
-            this.DialogResult = DialogResult.OK;
+            this.Close();
+
+           // this.DialogResult = DialogResult.OK;
 
             //Cadastro();
-            //this.Close();
         }
 
-        
-
-        //public void Cadastro()
-        //{
-        //    string nomeLivro= txtNome.Text;
-        //    string autorLivro= txtAutor.Text;
-        //    string dataLivro= txtData.Text;
-        //    string editoraLivro= txtEditora.Text;
-
-        //    Form1.list.Add(new Livro() { Nome= nomeLivro, Autor=autorLivro, Data = dataLivro, Editora= editoraLivro});
-        //}
 
         private void btnEditar_Click(object sender, EventArgs e)
         {
-            Form2 editar = new Form2();
+
+            EditaLivros();
+            //              
+            Form1 atualiza = new Form1();
+            atualiza.ListarLivros();
+
+
+            this.Close();
+        }
+
+        public void EditaLivros()
+        {
+            var editar = new Livro(Nome, Autor, Data, Editora);
+            editar.Nome = txtNome.Text.ToString();
+            editar.Autor = txtAutor.Text.ToString();
+            editar.Data = txtData.Text;
+            editar.Editora = txtEditora.Text.ToString();
+
+
+            Form1.listaDeLivros[1].Nome = 
+           // Form1.listaDeLivros[Form1.rowIndex] = editar;
+
+           
+        }
+
+        public void AddRows1(string nome, string autor, string data, string editora)
+        {
+            Livro editarLivro = new Livro(nome, autor, data, editora) { Nome = nome, Autor = autor, Data = data, Editora = editora };
+            Form1.listaDeLivros.Add(editarLivro);
+        }
+
+     
             
+
+        private void txtNome_TextChanged(object sender, EventArgs e)
+        {
+          
         }
     }
 }
