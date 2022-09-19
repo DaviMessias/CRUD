@@ -36,26 +36,28 @@
             this.autorDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Data = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.editoraDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.livroBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.livroBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.livroBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnEditar = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.livroBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.livroBindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.livroBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(11, 168);
+            this.label4.Location = new System.Drawing.Point(10, 126);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(0, 20);
+            this.label4.Size = new System.Drawing.Size(0, 15);
             this.label4.TabIndex = 7;
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -65,13 +67,14 @@
             this.Data,
             this.editoraDataGridViewTextBoxColumn});
             this.dataGridView1.DataSource = this.livroBindingSource1;
-            this.dataGridView1.Location = new System.Drawing.Point(11, 12);
+            this.dataGridView1.Location = new System.Drawing.Point(10, 9);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 29;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(676, 269);
+            this.dataGridView1.Size = new System.Drawing.Size(592, 202);
             this.dataGridView1.TabIndex = 11;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
@@ -115,19 +118,20 @@
             this.editoraDataGridViewTextBoxColumn.Name = "editoraDataGridViewTextBoxColumn";
             this.editoraDataGridViewTextBoxColumn.Width = 125;
             // 
-            // livroBindingSource
-            // 
-            this.livroBindingSource.DataSource = typeof(crudTEST.Livro);
-            // 
             // livroBindingSource1
             // 
             this.livroBindingSource1.DataSource = typeof(crudTEST.Livro);
             // 
+            // livroBindingSource
+            // 
+            this.livroBindingSource.DataSource = typeof(crudTEST.Livro);
+            // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(11, 287);
+            this.btnAdd.Location = new System.Drawing.Point(10, 215);
+            this.btnAdd.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(94, 29);
+            this.btnAdd.Size = new System.Drawing.Size(82, 22);
             this.btnAdd.TabIndex = 12;
             this.btnAdd.Text = "Adicionar";
             this.btnAdd.UseVisualStyleBackColor = true;
@@ -135,9 +139,10 @@
             // 
             // btnEditar
             // 
-            this.btnEditar.Location = new System.Drawing.Point(111, 287);
+            this.btnEditar.Location = new System.Drawing.Point(97, 215);
+            this.btnEditar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnEditar.Name = "btnEditar";
-            this.btnEditar.Size = new System.Drawing.Size(94, 29);
+            this.btnEditar.Size = new System.Drawing.Size(82, 22);
             this.btnEditar.TabIndex = 13;
             this.btnEditar.Text = "Editar";
             this.btnEditar.UseVisualStyleBackColor = true;
@@ -145,9 +150,10 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(211, 287);
+            this.button3.Location = new System.Drawing.Point(185, 215);
+            this.button3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(94, 29);
+            this.button3.Size = new System.Drawing.Size(82, 22);
             this.button3.TabIndex = 14;
             this.button3.Text = "Excluir";
             this.button3.UseVisualStyleBackColor = true;
@@ -155,19 +161,20 @@
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(773, 364);
+            this.ClientSize = new System.Drawing.Size(676, 273);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.btnEditar);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.label4);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Form1";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.livroBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.livroBindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.livroBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
