@@ -1,15 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-namespace crudTEST
+﻿namespace crudTEST
 {
     public partial class Form2 : Form
     {
@@ -18,30 +7,56 @@ namespace crudTEST
         {
             InitializeComponent();
 
-           if (livro == null)
+            if (livro == null)
             {
                 Livro = new Livro();
+            }
+            else
+            {
+                txtNome.Text = livro.Nome;
+                txtAutor.Text = livro.Autor;
+                dateTimePicker1.Value = DateTime.Parse(livro.Data);
+                txtEditora.Text = livro.Editora;
+                Livro = livro;
             }
         }
         private void btnSalvar_Click(object sender, EventArgs e)
         {
-            Livro.Nome = txtNome.Text;
-            Livro.Autor = txtAutor.Text;
-            Livro.Data = txtData.Text;
-            Livro.Editora = txtEditora.Text;
+            if (txtNome.Text.Equals("") || txtAutor.Text.Equals("") || txtEditora.Text.Equals(""))
+            {
+                MessageBox.Show("Preencha todos os campos antes de salvar. ", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
 
-            DialogResult = DialogResult.OK;
+            else if (dateTimePicker1.Value > DateTime.Now)
+            {
+                MessageBox.Show("Data Inválida", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
 
-            this.Close();
+            else
+            {
+                Livro.Nome = txtNome.Text;
+                Livro.Autor = txtAutor.Text;
+                Livro.Data = dateTimePicker1.Value.ToString();
+                Livro.Editora = txtEditora.Text;
+                DialogResult = DialogResult.OK;
+
+            }
 
 
+            // this.Close();
             //Cadastro();
         }
 
 
         private void btnEditar_Click(object sender, EventArgs e)  // BOTÃO CANCELAR
         {
-            this.Close();
+            DialogResult confirm = MessageBox.Show("Deseja Continuar?", "Cancelar", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2);
+
+            if (confirm.ToString().ToUpper() == "YES")
+            {
+                this.Close();
+            }
+
 
 
             //EditaLivros();
@@ -52,13 +67,16 @@ namespace crudTEST
 
             //this.Close();
         }
-     
+
 
         private void txtNome_TextChanged(object sender, EventArgs e)
         {
-          
+
         }
 
-   
+        private void txtData_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
