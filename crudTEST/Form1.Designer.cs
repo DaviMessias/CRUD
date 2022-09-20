@@ -41,6 +41,7 @@
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnEditar = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.livroBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.livroBindingSource)).BeginInit();
@@ -74,7 +75,7 @@
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 29;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(592, 202);
+            this.dataGridView1.Size = new System.Drawing.Size(674, 202);
             this.dataGridView1.TabIndex = 11;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
@@ -159,11 +160,16 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(676, 273);
+            this.ClientSize = new System.Drawing.Size(708, 273);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.btnEditar);
             this.Controls.Add(this.btnAdd);
@@ -194,5 +200,6 @@
         private DataGridViewTextBoxColumn autorDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn Data;
         private DataGridViewTextBoxColumn editoraDataGridViewTextBoxColumn;
+        private ContextMenuStrip contextMenuStrip1;
     }
 }

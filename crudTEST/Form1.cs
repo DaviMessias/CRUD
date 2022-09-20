@@ -5,7 +5,7 @@ using System.Windows.Forms;
 namespace crudTEST
 {
 
-    //testando
+    //DEU CERTO
     
     public partial class Form1 : Form
     {
@@ -44,19 +44,17 @@ namespace crudTEST
                 
                 dataGridView1.DataSource = null;
                 dataGridView1.DataSource = new BindingList<Livro>(listaDeLivros);
+                
                 //dataGridView1.DataSource = listaDeLivros;
 
             }
-            else
-            {
-                MessageBox.Show("Erro ao salvar livro");
-            }
+          
         }
 
 
         private void button2_Click(object sender, EventArgs e)  // BOTÃO EDITAR (PUXA OS VALORES PARA SEREM EDITADOS)
         {
-            Livro livro = new Livro();
+           // Livro livro = new Livro();
             
             if(listaDeLivros.Count == 0)
             {
@@ -68,15 +66,29 @@ namespace crudTEST
                 if (dataGridView1.CurrentRow.Selected)
                 {
                     
-                    Form2 frm2 = new Form2(livro);
+                    Form2 frm2 = new Form2(null);
 
                     frm2.txtNome.Text = dataGridView1.CurrentRow.Cells[1].Value.ToString();
                     frm2.txtAutor.Text = dataGridView1.CurrentRow.Cells[2].Value.ToString();
                     frm2.txtData.Text = dataGridView1.CurrentRow.Cells[3].Value.ToString();
                     frm2.txtEditora.Text = dataGridView1.CurrentRow.Cells[4].Value.ToString();
 
+                    //  frm2.btnSalvar.Tag="Editar"
+
                     frm2.ShowDialog();
-                    
+                    if (frm2.DialogResult == DialogResult.OK)
+                    {
+                        listaDeLivros.RemoveAt(rowIndex);
+
+                        frm2.Livro.Id = rowIndex +1 ;
+
+                        listaDeLivros.Insert(rowIndex, frm2.Livro);
+                        dataGridView1.DataSource = null;
+                        dataGridView1.DataSource = new BindingList<Livro>(listaDeLivros);
+
+
+                    }
+
                 }
                 else { MessageBox.Show("É preciso selecionar um livro para editar.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Information); }
 
@@ -93,7 +105,9 @@ namespace crudTEST
             }
             else if (dataGridView1.CurrentRow.Selected)
             {
-                dataGridView1.Rows.Remove(dataGridView1.CurrentRow);
+                listaDeLivros.RemoveAt(dataGridView1.CurrentRow.Index);
+                dataGridView1.DataSource = null;
+                dataGridView1.DataSource = new BindingList<Livro>(listaDeLivros);
             }
             else if (dataGridView1.SelectedRows.Count == 0)
                 {
@@ -103,32 +117,32 @@ namespace crudTEST
         }
 
         //metodos
-        public void AddRows(string nome, string autor, string data, string editora) // ADICIONA OS VALORES AO DataGrid E IMPLEMENTA ID
-        {
-            var idAtual = 0;
-            var idASerInserido = 0;
+        //public void AddRows(string nome, string autor, string data, string editora) // ADICIONA OS VALORES AO DataGrid E IMPLEMENTA ID
+        //{
+        //    var idAtual = 0;
+        //    var idASerInserido = 0;
 
-            Livro novo = new Livro() { Nome = nome, Autor = autor, Data = data, Editora = editora };
-            if (listaDeLivros.Count == 0)
-            {
-            }
-            else
-            {
-                idAtual = listaDeLivros.Last().Id;
-            }
+        //    Livro novo = new Livro() { Nome = nome, Autor = autor, Data = data, Editora = editora };
+        //    if (listaDeLivros.Count == 0)
+        //    {
+        //    }
+        //    else
+        //    {
+        //        idAtual = listaDeLivros.Last().Id;
+        //    }
 
-            idASerInserido = ++idAtual;
+        //    idASerInserido = ++idAtual;
 
-            novo.Id = idASerInserido;
-            listaDeLivros.Add(novo);
-        }
+        //    novo.Id = idASerInserido;
+        //    listaDeLivros.Add(novo);
+        //}
 
         public List<Livro> ListarLivros()   
         {
             dataGridView1.DataSource = new BindingList<Livro>(listaDeLivros);
 
-            dataGridView1.Update();
-            dataGridView1.Refresh();
+          //  dataGridView1.Update();
+            //dataGridView1.Refresh();
             return listaDeLivros.ToList();
 
 

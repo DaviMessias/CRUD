@@ -120,7 +120,7 @@
             // 
             // btnEditar
             // 
-            this.btnEditar.Location = new System.Drawing.Point(193, 60);
+            this.btnEditar.Location = new System.Drawing.Point(193, 85);
             this.btnEditar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnEditar.Name = "btnEditar";
             this.btnEditar.Size = new System.Drawing.Size(75, 22);
@@ -157,11 +157,11 @@
         private Label label2;
         private Label label3;
         private Label label4;
-        private Button btnSalvar;
         private Button btnEditar;
         public TextBox txtNome;
         public TextBox txtAutor;
         public TextBox txtData;
         public TextBox txtEditora;
+        public Button btnSalvar;
     }
 }
