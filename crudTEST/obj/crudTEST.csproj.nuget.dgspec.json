@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Usuario\\Desktop\\CRUD\\crudTEST\\crudTEST.csproj": {}
+    "C:\\Users\\davib\\OneDrive\\Área de Trabalho\\repositorio teste\\CRUD\\crudTEST\\crudTEST.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Usuario\\Desktop\\CRUD\\crudTEST\\crudTEST.csproj": {
+    "C:\\Users\\davib\\OneDrive\\Área de Trabalho\\repositorio teste\\CRUD\\crudTEST\\crudTEST.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Usuario\\Desktop\\CRUD\\crudTEST\\crudTEST.csproj",
+        "projectUniqueName": "C:\\Users\\davib\\OneDrive\\Área de Trabalho\\repositorio teste\\CRUD\\crudTEST\\crudTEST.csproj",
         "projectName": "crudTEST",
-        "projectPath": "C:\\Users\\Usuario\\Desktop\\CRUD\\crudTEST\\crudTEST.csproj",
-        "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Usuario\\Desktop\\CRUD\\crudTEST\\obj\\",
+        "projectPath": "C:\\Users\\davib\\OneDrive\\Área de Trabalho\\repositorio teste\\CRUD\\crudTEST\\crudTEST.csproj",
+        "packagesPath": "C:\\Users\\davib\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\davib\\OneDrive\\Área de Trabalho\\repositorio teste\\CRUD\\crudTEST\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Usuario\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\davib\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
