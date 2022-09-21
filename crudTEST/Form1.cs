@@ -7,7 +7,7 @@ namespace crudTEST
 
     public partial class Form1 : Form
     {
-        public static List<Livro> listaDeLivros = new List<Livro>();
+        private List<Livro> listaDeLivros = Singleton.Instance();
         public static int indexSelecionado;
 
         public Form1()
