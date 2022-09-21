@@ -17,37 +17,46 @@ namespace crudTEST
 
         private void AoClicarEmAdicionar(object sender, EventArgs e) // BOTÃO ADICIONAR
         {
-            var frm2 = new Form2(null);
-            frm2.ShowDialog();
-
-            if (frm2.DialogResult == DialogResult.OK)
+            try
             {
-                var idAtual = 0;
-                var idASerInserido = 0;
+                var frm2 = new Form2(null);
+                frm2.ShowDialog();
 
-                if (listaDeLivros.Count == 0)
+                if (frm2.DialogResult == DialogResult.OK)
                 {
-                    idASerInserido = 1;
+                    var idAtual = 0;
+                    var idASerInserido = 0;
+
+                    if (listaDeLivros.Count == 0)
+                    {
+                        idASerInserido = 1;
+                    }
+                    else
+                    {
+                        idAtual = listaDeLivros.Last().Id;
+                    }
+
+                    idASerInserido = ++idAtual;
+
+                    frm2.Livro.Id = idASerInserido;
+                    listaDeLivros.Add(frm2.Livro);
+
+                    dataGridView1.DataSource = null;
+                    dataGridView1.DataSource = listaDeLivros;
+
+                    //dataGridView1.DataSource = listaDeLivros;
                 }
-                else
-                {
-                    idAtual = listaDeLivros.Last().Id;
-                }
-
-                idASerInserido = ++idAtual;
-
-                frm2.Livro.Id = idASerInserido;
-                listaDeLivros.Add(frm2.Livro);
-
-                dataGridView1.DataSource = null;
-                dataGridView1.DataSource = listaDeLivros;
-
-                //dataGridView1.DataSource = listaDeLivros;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
         private void AoClicarEmEditar(object sender, EventArgs e)  // BOTÃO EDITAR (PUXA OS VALORES PARA SEREM EDITADOS)
         {
+            try
+            {
             if (listaDeLivros.Count == 0)
             {
                 MessageBox.Show("Não há livros para editar!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -57,35 +66,48 @@ namespace crudTEST
                 indexSelecionado = dataGridView1.CurrentRow.Index;
                 if (dataGridView1.CurrentRow.Selected)
                 {
-                    var livroSelecionado = dataGridView1.Rows[indexSelecionado].DataBoundItem as Livro;
-                    Form2 frm2 = new Form2(livroSelecionado) ?? throw new Exception("erro ao selecionar livro");
+                   var livroSelecionado = dataGridView1.Rows[indexSelecionado].DataBoundItem as Livro;
+                   Form2 frm2 = new Form2(livroSelecionado) ?? throw new Exception("erro ao selecionar livro");
 
-                    frm2.ShowDialog();
-                    if (frm2.DialogResult == DialogResult.OK)
-                    {
-                        listaDeLivros.RemoveAt(indexSelecionado);
+                   frm2.ShowDialog();
+                if (frm2.DialogResult == DialogResult.OK)
+                {
+                   listaDeLivros.RemoveAt(indexSelecionado);
 
-                        frm2.Livro.Id = indexSelecionado + 1;
+                   frm2.Livro.Id = indexSelecionado + 1;
 
-                        listaDeLivros.Insert(indexSelecionado, frm2.Livro);
+                   listaDeLivros.Insert(indexSelecionado, frm2.Livro);
 
-                        dataGridView1.DataSource = null;
-                        dataGridView1.DataSource = new BindingList<Livro>(listaDeLivros);
-                    }
+                   dataGridView1.DataSource = null;
+                   dataGridView1.DataSource = new BindingList<Livro>(listaDeLivros);
                 }
-                else { MessageBox.Show("É preciso selecionar um livro para editar.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Information); }
+                }
+                else 
+                    { 
+                        MessageBox.Show("É preciso selecionar um livro para editar.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Information); 
+                    }
             }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+
         }
 
         private void AoClicarEmExcluir(object sender, EventArgs e)  // BOTÃO EXCLUIR
         {
+            try
+            {
             if (listaDeLivros.Count == 0)
             {
                 MessageBox.Show("Não há livros para remover. ", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else if (dataGridView1.CurrentRow.Selected)
             {
-                DialogResult confirm = MessageBox.Show("Deseja Continuar?", "Cancelar", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2);
+                DialogResult confirm = MessageBox.Show("Deseja Continuar?", "Excluir", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2);
 
                 if (confirm.ToString().ToUpper() == "YES")
                 {
@@ -108,6 +130,13 @@ namespace crudTEST
             {
 
             }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
         }
 
         //metodos

@@ -46,7 +46,6 @@
             this.txtNome.Name = "txtNome";
             this.txtNome.Size = new System.Drawing.Size(146, 27);
             this.txtNome.TabIndex = 0;
-            this.txtNome.TextChanged += new System.EventHandler(this.txtNome_TextChanged);
             // 
             // txtAutor
             // 
@@ -118,7 +117,7 @@
             this.btnEditar.TabIndex = 9;
             this.btnEditar.Text = "Cancelar";
             this.btnEditar.UseVisualStyleBackColor = true;
-            this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click);
+            this.btnEditar.Click += new System.EventHandler(this.AoClicarEmCancelar);
             // 
             // dateTimePicker1
             // 
