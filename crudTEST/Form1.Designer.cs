@@ -71,10 +71,11 @@
             this.dataGridView1.Location = new System.Drawing.Point(7, 12);
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 29;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(668, 269);
+            this.dataGridView1.Size = new System.Drawing.Size(677, 269);
             this.dataGridView1.TabIndex = 11;
             // 
             // Id
@@ -83,6 +84,7 @@
             this.Id.HeaderText = "Id";
             this.Id.MinimumWidth = 6;
             this.Id.Name = "Id";
+            this.Id.ReadOnly = true;
             this.Id.Width = 125;
             // 
             // nomeDataGridViewTextBoxColumn
@@ -91,6 +93,7 @@
             this.nomeDataGridViewTextBoxColumn.HeaderText = "Nome";
             this.nomeDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.nomeDataGridViewTextBoxColumn.Name = "nomeDataGridViewTextBoxColumn";
+            this.nomeDataGridViewTextBoxColumn.ReadOnly = true;
             this.nomeDataGridViewTextBoxColumn.Width = 125;
             // 
             // autorDataGridViewTextBoxColumn
@@ -99,6 +102,7 @@
             this.autorDataGridViewTextBoxColumn.HeaderText = "Autor";
             this.autorDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.autorDataGridViewTextBoxColumn.Name = "autorDataGridViewTextBoxColumn";
+            this.autorDataGridViewTextBoxColumn.ReadOnly = true;
             this.autorDataGridViewTextBoxColumn.Width = 125;
             // 
             // editoraDataGridViewTextBoxColumn
@@ -107,6 +111,7 @@
             this.editoraDataGridViewTextBoxColumn.HeaderText = "Editora";
             this.editoraDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.editoraDataGridViewTextBoxColumn.Name = "editoraDataGridViewTextBoxColumn";
+            this.editoraDataGridViewTextBoxColumn.ReadOnly = true;
             this.editoraDataGridViewTextBoxColumn.Width = 125;
             // 
             // Data
@@ -115,6 +120,7 @@
             this.Data.HeaderText = "Data de Publicação:";
             this.Data.MinimumWidth = 6;
             this.Data.Name = "Data";
+            this.Data.ReadOnly = true;
             this.Data.Width = 125;
             // 
             // livroBindingSource1
@@ -165,7 +171,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(687, 364);
+            this.ClientSize = new System.Drawing.Size(712, 364);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.btnEditar);
             this.Controls.Add(this.btnAdd);

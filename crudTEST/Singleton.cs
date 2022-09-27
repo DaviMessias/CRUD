@@ -11,6 +11,7 @@ namespace crudTEST
     public class Singleton
     {
        
+       
         private static List<Livro> listaDeLivros;
 
         public static List<Livro> Instance()
