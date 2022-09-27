@@ -28,7 +28,7 @@
             }
 
         }
-        private void btnSalvar_Click(object sender, EventArgs e)
+        private void AoCLicarEmSalvar(object sender, EventArgs e)
         {
             try
             {
@@ -57,8 +57,6 @@
                 MessageBox.Show(ex.Message);
             }
 
-            // this.Close();
-            //Cadastro();
         }
 
 
@@ -77,16 +75,6 @@
             {
                 MessageBox.Show(ex.Message);
             }
-
-
-
-            //EditaLivros();
-            ////              
-            //Form1 atualiza = new Form1();
-            //atualiza.ListarLivros();
-
-
-            //this.Close();
         }
     }
 }

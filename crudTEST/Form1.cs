@@ -3,10 +3,11 @@ using System.ComponentModel;
 namespace crudTEST
 {
 
-    //dateTime
+   //          26/09
 
     public partial class Form1 : Form
     {
+        private Repository repository = new Repository();
         private List<Livro> listaDeLivros = Singleton.Instance();
         public static int indexSelecionado;
 
@@ -19,10 +20,10 @@ namespace crudTEST
         {
             try
             {
-                var frm2 = new Form2(null);
-                frm2.ShowDialog();
+                var formulario2 = new Form2(null);
+                formulario2.ShowDialog();
 
-                if (frm2.DialogResult == DialogResult.OK)
+                if (formulario2.DialogResult == DialogResult.OK)
                 {
                     var idAtual = 0;
                     var idASerInserido = 0;
@@ -38,13 +39,11 @@ namespace crudTEST
 
                     idASerInserido = ++idAtual;
 
-                    frm2.Livro.Id = idASerInserido;
-                    listaDeLivros.Add(frm2.Livro);
+                    formulario2.Livro.Id = idASerInserido;
 
-                    dataGridView1.DataSource = null;
-                    dataGridView1.DataSource = listaDeLivros;
+                    repository.Adicionar(formulario2.Livro);
 
-                    //dataGridView1.DataSource = listaDeLivros;
+                    AtualizarDataGrid();
                 }
             }
             catch (Exception ex)
@@ -72,16 +71,11 @@ namespace crudTEST
                    frm2.ShowDialog();
                 if (frm2.DialogResult == DialogResult.OK)
                 {
-                   listaDeLivros.RemoveAt(indexSelecionado);
+                   repository.Editar(frm2.Livro);
 
-                   frm2.Livro.Id = indexSelecionado + 1;
-
-                   listaDeLivros.Insert(indexSelecionado, frm2.Livro);
-
-                   dataGridView1.DataSource = null;
-                   dataGridView1.DataSource = new BindingList<Livro>(listaDeLivros);
+                   AtualizarDataGrid();
                 }
-                }
+                }  
                 else 
                     { 
                         MessageBox.Show("É preciso selecionar um livro para editar.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Information); 
@@ -93,7 +87,6 @@ namespace crudTEST
             {
                 MessageBox.Show(ex.Message);
             }
-
 
         }
 
@@ -111,9 +104,11 @@ namespace crudTEST
 
                 if (confirm.ToString().ToUpper() == "YES")
                 {
-                    listaDeLivros.RemoveAt(dataGridView1.CurrentRow.Index);
-                    dataGridView1.DataSource = null;
-                    dataGridView1.DataSource = new BindingList<Livro>(listaDeLivros);
+                    int IdSelecionado = Convert.ToInt32(dataGridView1.CurrentRow.Cells[0].Value);
+                    repository.Deletar(IdSelecionado);
+                
+
+                    AtualizarDataGrid();
 
                 }
                 else
@@ -126,58 +121,19 @@ namespace crudTEST
                 MessageBox.Show("Nenhum Item Selecionado", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
-            else
-            {
 
-            }
-
-            }
-            catch (Exception ex)
+            } catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
 
         }
-
-        //metodos
-        //public void AddRows(string nome, string autor, string data, string editora) // ADICIONA OS VALORES AO DataGrid E IMPLEMENTA ID
-        //{
-        //    var idAtual = 0;
-        //    var idASerInserido = 0;
-
-        //    Livro novo = new Livro() { Nome = nome, Autor = autor, Data = data, Editora = editora };
-        //    if (listaDeLivros.Count == 0)
-        //    {
-        //    }
-        //    else
-        //    {
-        //        idAtual = listaDeLivros.Last().Id;
-        //    }
-
-        //    idASerInserido = ++idAtual;
-
-        //    novo.Id = idASerInserido;
-        //    listaDeLivros.Add(novo);
-        //}
-
-        public List<Livro> ListarLivros()
+     
+        public void AtualizarDataGrid()
         {
-            dataGridView1.DataSource = new BindingList<Livro>(listaDeLivros);
-
-            //  dataGridView1.Update();
-            //dataGridView1.Refresh();
-            return listaDeLivros.ToList();
-
-
-            //var bindingList = new BindingList<Livro>(listaDeLivros);
-            //var source = new BindingSource(bindingList, null);
-            //dataGridView1.DataSource = listaDeLivros;
-
-            //dataGridView1.DataSource = source;
-
-            // dataGridView1.DataSource = listaDeLivros.ToList();
-            //dataGridView1.Rows.Add(nome, autor);
-
+            dataGridView1.DataSource = null;
+            dataGridView1.DataSource = listaDeLivros;
         }
+
     }
 }
