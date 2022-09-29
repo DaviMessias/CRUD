@@ -26,7 +26,6 @@
             {
                 MessageBox.Show(ex.Message);
             }
-
         }
         private void AoCLicarEmSalvar(object sender, EventArgs e)
         {
@@ -56,11 +55,10 @@
             {
                 MessageBox.Show(ex.Message);
             }
-
         }
 
 
-        private void AoClicarEmCancelar(object sender, EventArgs e)  // BOTÃO CANCELAR
+        private void AoClicarEmCancelar(object sender, EventArgs e)
         {
             try
             {
@@ -76,5 +74,7 @@
                 MessageBox.Show(ex.Message);
             }
         }
+
+
     }
 }
