@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data;
+
 
 namespace crudTEST
 {
@@ -11,9 +7,7 @@ namespace crudTEST
     {
         public static List<Livro> ConverterLivro(DataTable dt)
         {
-
             var list = new List<Livro>();
-
 
             for (int i = 0; i < dt.Rows.Count; i++)
             {
@@ -22,7 +16,7 @@ namespace crudTEST
                     Id = Convert.ToInt32(dt.Rows[i]["id"]),
                     Nome = dt.Rows[i]["nome"].ToString(),
                     Autor = dt.Rows[i]["autor"].ToString(),
-                    Data = dt.Rows[i]["data"].ToString(),
+                    Data = DateTime.Parse(dt.Rows[i]["data"].ToString()),
                     Editora = dt.Rows[i]["editora"].ToString()
                 };
 

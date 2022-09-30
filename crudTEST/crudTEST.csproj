@@ -9,14 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <EditorConfigFiles Remove="C:\Users\Usuario\Documents\CRUD\CRUD\crudTEST\.editorconfig" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="C:\Users\Usuario\Documents\CRUD\CRUD\crudTEST\.editorconfig" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
   </ItemGroup>
 

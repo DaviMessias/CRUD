@@ -70,3 +70,11 @@ C:\Users\Usuario\Documents\CRUD\CRUD\crudTEST\obj\Debug\net6.0-windows\refint\cr
 C:\Users\Usuario\Documents\CRUD\CRUD\crudTEST\obj\Debug\net6.0-windows\crudTEST.pdb
 C:\Users\Usuario\Documents\CRUD\CRUD\crudTEST\obj\Debug\net6.0-windows\crudTEST.genruntimeconfig.cache
 C:\Users\Usuario\Documents\CRUD\CRUD\crudTEST\obj\Debug\net6.0-windows\ref\crudTEST.dll
+C:\Users\Usuario\Documents\CRUD\CRUD\crudTEST\bin\Debug\net6.0-windows\System.Data.SqlClient.dll
+C:\Users\Usuario\Documents\CRUD\CRUD\crudTEST\bin\Debug\net6.0-windows\runtimes\win-arm64\native\sni.dll
+C:\Users\Usuario\Documents\CRUD\CRUD\crudTEST\bin\Debug\net6.0-windows\runtimes\win-x64\native\sni.dll
+C:\Users\Usuario\Documents\CRUD\CRUD\crudTEST\bin\Debug\net6.0-windows\runtimes\win-x86\native\sni.dll
+C:\Users\Usuario\Documents\CRUD\CRUD\crudTEST\bin\Debug\net6.0-windows\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\Usuario\Documents\CRUD\CRUD\crudTEST\bin\Debug\net6.0-windows\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\Usuario\Documents\CRUD\CRUD\crudTEST\obj\Debug\net6.0-windows\crudTEST.csproj.CopyComplete
+C:\Users\Usuario\Documents\CRUD\CRUD\crudTEST\bin\Debug\net6.0-windows\crudTEST.dll.config

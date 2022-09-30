@@ -3,7 +3,7 @@ using System.ComponentModel;
 namespace crudTEST
 {
 
-    //          26/09
+    //1
 
     public partial class Form1 : Form
     {
@@ -13,22 +13,22 @@ namespace crudTEST
 
         public Form1()
         {
-            InitializeComponent();
-            AtualizarDataGrid();
+          InitializeComponent();
+          AtualizarDataGrid();
         }
 
         private void AoClicarEmAdicionar(object sender, EventArgs e)
         {
             try
             {
-                var formulario2 = new Form2(null);
-                formulario2.ShowDialog();
-
-                if (formulario2.DialogResult == DialogResult.OK)
-                {
-                    repository.Adicionar(formulario2.Livro);
-                    AtualizarDataGrid();
-                }
+              var formulario2 = new Form2(null);
+              formulario2.ShowDialog();
+                
+              if (formulario2.DialogResult == DialogResult.OK)
+              {
+                 repository.Adicionar(formulario2.Livro);
+                 AtualizarDataGrid();
+              }
             }
             catch (Exception ex)
             {
@@ -50,15 +50,14 @@ namespace crudTEST
 
                     if (dataGridView1.CurrentRow.Selected)
                     {
-                        var livroSelecionado = dataGridView1.Rows[indexSelecionado].DataBoundItem as Livro;
+                        var idSelecionado = Convert.ToInt32(dataGridView1.CurrentRow.Cells[0].Value);
+                        var livroSelecionado = repository.BuscarPorId(idSelecionado);
                         Form2 frm2 = new Form2(livroSelecionado) ?? throw new Exception("erro ao selecionar livro");
 
                         frm2.ShowDialog();
                         if (frm2.DialogResult == DialogResult.OK)
                         {
-
                             repository.Editar(frm2.Livro);
-
                             AtualizarDataGrid();
                         }
                     }
@@ -66,15 +65,12 @@ namespace crudTEST
                     {
                         MessageBox.Show("É preciso selecionar um livro para editar.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
-
                 }
-
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-
         }
 
         private void AoClicarEmExcluir(object sender, EventArgs e)

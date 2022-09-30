@@ -1,21 +1,25 @@
-﻿using System.Data;
+﻿using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 
 namespace crudTEST
 {
     public class RepositoryDB : IRepository
     {
-        const string connectionString = "Data Source=.;Initial Catalog=db_crud;Integrated Security=True;";
-        SqlConnection conn = new SqlConnection(connectionString);
-
+       public SqlConnection conexao()
+       {
+            SqlConnection conexao = new SqlConnection(ConfigurationManager.ConnectionStrings["conexaoSql"].ConnectionString);
+            conexao.Open();
+            return conexao;
+       }
         public void Adicionar(Livro livro)
         {
-            using (conn = new SqlConnection("Data Source=.;Initial Catalog=db_crud;Integrated Security=True;"))
+            using (var conn = conexao())
             {
                 try
                 {
                     var cmd = new SqlCommand("INSERT INTO Livro(nome,autor, data, editora) VALUES (@nome,@autor, @data, @editora)", conn);
-                    conn.Open();
+                   
                     cmd.Parameters.AddWithValue("@nome", livro.Nome);
                     cmd.Parameters.AddWithValue("@autor", livro.Autor);
                     cmd.Parameters.AddWithValue("@data", livro.Data);
@@ -24,19 +28,18 @@ namespace crudTEST
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Erro : " + ex.Message);
+                    throw new Exception("Erro : " + ex.Message);
                 }
             }
         }
 
         public void Editar(Livro livro)
         {
-            using (conn = new SqlConnection("Data Source=.;Initial Catalog=db_crud;Integrated Security=True;"))
+            using (var conn = conexao())
             {
                 try
                 {
                     var cmd = new SqlCommand("UPDATE Livro SET nome=@nome, autor=@autor, data=@data, editora=@editora WHERE id=@id", conn);
-                    conn.Open();
                     cmd.Parameters.AddWithValue("@id", livro.Id);
                     cmd.Parameters.AddWithValue("@nome", livro.Nome);
                     cmd.Parameters.AddWithValue("@autor", livro.Autor);
@@ -52,15 +55,13 @@ namespace crudTEST
             }
         }
 
-
         public void Deletar(int Id)
         {
-            using (conn = new SqlConnection("Data Source=.;Initial Catalog=db_crud;Integrated Security=True;"))
+            using (var conn = conexao())
             {
                 try
                 {
                     var cmd = new SqlCommand("DELETE Livro WHERE id= @id", conn);
-                    conn.Open();
                     cmd.Parameters.AddWithValue("@id", Id);
                     cmd.ExecuteNonQuery();
                 }
@@ -71,11 +72,10 @@ namespace crudTEST
             }
         }
 
-
         public List<Livro> BuscarTodos()
         {
             List<Livro> lista = new List<Livro>();
-            using (conn = new SqlConnection("Data Source=.;Initial Catalog=db_crud;Integrated Security=True;"))
+            using (var conn = conexao())
             {
                 try
                 {
@@ -83,7 +83,6 @@ namespace crudTEST
                     var cmd = new SqlCommand("SELECT * from Livro", conn);
                     var adapt = new SqlDataAdapter(cmd);
 
-                    conn.Open();
                     adapt.Fill(dt);
 
                     lista = Conversor.ConverterLivro(dt);
@@ -99,12 +98,28 @@ namespace crudTEST
         }
         public Livro BuscarPorId(int Id)
         {
-            var cmd = new SqlCommand("SELECT * from Livro WHERE id= @id", conn);
-            cmd.Parameters.Add("@dev", SqlDbType.Text);
-            cmd.Parameters["@id"].Value = Id;
+            List<Livro> lista = new List<Livro>();
+            using (var conn = conexao())
+            {
+                try
+                {
+                    DataTable dt = new DataTable();
+                    var cmd = new SqlCommand("SELECT * from Livro WHERE id=@id", conn);
+                    {
+                        cmd.Parameters.AddWithValue("@id", Id);
+                    }
+                    var adapt = new SqlDataAdapter(cmd);
+                    adapt.Fill(dt);
+                    lista = Conversor.ConverterLivro(dt);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Erro : " + ex.Message);
+                }
+            }
 
-            long id = (long)cmd.ExecuteScalar();
-            throw new NotImplementedException();
+            return lista[0];
         }
+
     }
 }

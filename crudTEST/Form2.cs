@@ -17,7 +17,7 @@
                 {
                     txtNome.Text = livro.Nome;
                     txtAutor.Text = livro.Autor;
-                    dateTimePicker1.Value = DateTime.Parse(livro.Data);
+                    dateTimePicker1.Text = livro.Data.ToString();
                     txtEditora.Text = livro.Editora;
                     Livro = livro;
                 }
@@ -45,7 +45,7 @@
                 {
                     Livro.Nome = txtNome.Text;
                     Livro.Autor = txtAutor.Text;
-                    Livro.Data = dateTimePicker1.Value.ToString();
+                    Livro.Data = dateTimePicker1.Value;
                     Livro.Editora = txtEditora.Text;
                     DialogResult = DialogResult.OK;
 
