@@ -146,6 +146,16 @@
             "rid": "win"
           }
         }
+      },
+      "Dominio/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/Dominio.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Dominio.dll": {}
+        }
       }
     }
   },
@@ -462,10 +472,16 @@
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
+    },
+    "Dominio/1.0.0": {
+      "type": "project",
+      "path": "../Dominio/Dominio.csproj",
+      "msbuildProject": "../Dominio/Dominio.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net6.0-windows7.0": [
+      "Dominio >= 1.0.0",
       "System.Data.SqlClient >= 4.8.3"
     ]
   },
@@ -500,7 +516,11 @@
       "frameworks": {
         "net6.0-windows7.0": {
           "targetAlias": "net6.0-windows",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\Usuario\\Documents\\CRUD\\CRUD\\Dominio\\Dominio.csproj": {
+              "projectPath": "C:\\Users\\Usuario\\Documents\\CRUD\\CRUD\\Dominio\\Dominio.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

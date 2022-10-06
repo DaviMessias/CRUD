@@ -1,4 +1,6 @@
-﻿using System.Data;
+﻿
+using Dominio;
+using System.Data;
 
 
 namespace crudTEST

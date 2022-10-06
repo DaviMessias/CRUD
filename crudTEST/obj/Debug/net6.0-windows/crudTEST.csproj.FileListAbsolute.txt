@@ -78,3 +78,5 @@ C:\Users\Usuario\Documents\CRUD\CRUD\crudTEST\bin\Debug\net6.0-windows\runtimes\
 C:\Users\Usuario\Documents\CRUD\CRUD\crudTEST\bin\Debug\net6.0-windows\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
 C:\Users\Usuario\Documents\CRUD\CRUD\crudTEST\obj\Debug\net6.0-windows\crudTEST.csproj.CopyComplete
 C:\Users\Usuario\Documents\CRUD\CRUD\crudTEST\bin\Debug\net6.0-windows\crudTEST.dll.config
+C:\Users\Usuario\Documents\CRUD\CRUD\crudTEST\bin\Debug\net6.0-windows\Dominio.dll
+C:\Users\Usuario\Documents\CRUD\CRUD\crudTEST\bin\Debug\net6.0-windows\Dominio.pdb

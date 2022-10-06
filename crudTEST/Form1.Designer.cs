@@ -1,4 +1,6 @@
-﻿namespace crudTEST
+﻿using Dominio;
+
+namespace crudTEST
 {
     partial class Form1
     {
@@ -125,11 +127,11 @@
             // 
             // livroBindingSource1
             // 
-            this.livroBindingSource1.DataSource = typeof(crudTEST.Livro);
+            this.livroBindingSource1.DataSource = typeof(Dominio.Livro);
             // 
             // livroBindingSource
             // 
-            this.livroBindingSource.DataSource = typeof(crudTEST.Livro);
+            this.livroBindingSource.DataSource = typeof(Dominio.Livro);
             // 
             // btnAdd
             // 
