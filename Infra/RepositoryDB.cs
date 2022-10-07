@@ -2,6 +2,7 @@
 using System.Data;
 using System.Data.SqlClient;
 using Dominio;
+using Infra;
 
 namespace crudTEST
 {
@@ -20,7 +21,7 @@ namespace crudTEST
                 try
                 {
                     var cmd = new SqlCommand("INSERT INTO Livro(nome,autor, data, editora) VALUES (@nome,@autor, @data, @editora)", conn);
-                   
+
                     cmd.Parameters.AddWithValue("@nome", livro.Nome);
                     cmd.Parameters.AddWithValue("@autor", livro.Autor);
                     cmd.Parameters.AddWithValue("@data", livro.Data);
@@ -29,7 +30,7 @@ namespace crudTEST
                 }
                 catch (Exception ex)
                 {
-                    throw new Exception("Erro : " + ex.Message);
+                    throw new Exception("Erro ao adicionar livro", ex);
                 }
             }
         }
@@ -51,7 +52,7 @@ namespace crudTEST
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Erro : " + ex.Message);
+                    throw new Exception("Erro : " + ex.Message);
                 }
             }
         }
@@ -68,7 +69,7 @@ namespace crudTEST
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Erro : " + ex.Message);
+                    throw new Exception("Erro : " + ex.Message);
                 }
             }
         }
@@ -91,7 +92,7 @@ namespace crudTEST
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Erro : " + ex.Message);
+                    throw new Exception("Erro : " + ex.Message);
                 }
             }
 
@@ -115,7 +116,7 @@ namespace crudTEST
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Erro : " + ex.Message);
+                    throw new Exception("Erro : " + ex.Message);
                 }
             }
 

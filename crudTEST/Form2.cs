@@ -67,7 +67,5 @@ namespace crudTEST
                 MessageBox.Show(ex.Message);
             }
         }
-
-
     }
 }

@@ -22,7 +22,7 @@ namespace Dominio
             {
                 throw new Exception("Editora inválida");
             }
-            else if (livro.Data.Value > DateTime.Today)
+            else if (livro.Data.Value >= DateTime.Now)
             {
                 throw new Exception("Data inválida");
             }

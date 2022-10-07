@@ -9,6 +9,7 @@
       "crudTEST/1.0.0": {
         "dependencies": {
           "Dominio": "1.0.0",
+          "Infra": "1.0.0",
           "System.Data.SqlClient": "4.8.3"
         },
         "runtime": {
@@ -94,6 +95,14 @@
         "runtime": {
           "Dominio.dll": {}
         }
+      },
+      "Infra/1.0.0": {
+        "dependencies": {
+          "Dominio": "1.0.0"
+        },
+        "runtime": {
+          "Infra.dll": {}
+        }
       }
     }
   },
@@ -167,6 +176,11 @@
       "hashPath": "system.security.principal.windows.4.7.0.nupkg.sha512"
     },
     "Dominio/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Infra/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

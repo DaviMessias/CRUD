@@ -80,3 +80,5 @@ C:\Users\Usuario\Documents\CRUD\CRUD\crudTEST\obj\Debug\net6.0-windows\crudTEST.
 C:\Users\Usuario\Documents\CRUD\CRUD\crudTEST\bin\Debug\net6.0-windows\crudTEST.dll.config
 C:\Users\Usuario\Documents\CRUD\CRUD\crudTEST\bin\Debug\net6.0-windows\Dominio.dll
 C:\Users\Usuario\Documents\CRUD\CRUD\crudTEST\bin\Debug\net6.0-windows\Dominio.pdb
+C:\Users\Usuario\Documents\CRUD\CRUD\crudTEST\bin\Debug\net6.0-windows\Infra.dll
+C:\Users\Usuario\Documents\CRUD\CRUD\crudTEST\bin\Debug\net6.0-windows\Infra.pdb
