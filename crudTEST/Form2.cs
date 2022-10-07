@@ -1,4 +1,6 @@
-﻿namespace crudTEST
+﻿using Dominio;
+
+namespace crudTEST
 {
     public partial class Form2 : Form
     {
@@ -20,6 +22,7 @@
                     dateTimePicker1.Text = livro.Data.ToString();
                     txtEditora.Text = livro.Editora;
                     Livro = livro;
+                    
                 }
             }
             catch (Exception ex)
@@ -31,25 +34,15 @@
         {
             try
             {
-                if (txtNome.Text.Equals("") || txtAutor.Text.Equals("") || txtEditora.Text.Equals("")) //validação
-                {
-                    MessageBox.Show("Preencha todos os campos antes de salvar. ", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-
-                else if (dateTimePicker1.Value > DateTime.Now)
-                {
-                    MessageBox.Show("Data Inválida", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-
-                else
-                {
                     Livro.Nome = txtNome.Text;
                     Livro.Autor = txtAutor.Text;
                     Livro.Data = dateTimePicker1.Value;
                     Livro.Editora = txtEditora.Text;
-                    DialogResult = DialogResult.OK;
 
-                }
+                  if( Validacao.ValidarCampo(Livro) == true)  
+                  {
+                    DialogResult = DialogResult.OK;
+                  }
             }
             catch (Exception ex)
             {
@@ -62,7 +55,7 @@
         {
             try
             {
-                DialogResult confirm = MessageBox.Show("Deseja Continuar?", "Cancelar", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2);
+                DialogResult confirm = MessageBox.Show("Deseja Cancelar?", "Cancelar", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2);
 
                 if (confirm.ToString().ToUpper() == "YES")
                 {
@@ -74,7 +67,5 @@
                 MessageBox.Show(ex.Message);
             }
         }
-
-
     }
 }

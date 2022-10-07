@@ -1,17 +1,15 @@
 using System.ComponentModel;
+using Dominio;
 
 namespace crudTEST
 {
-
-    //1
-
     public partial class Form1 : Form
     {
         private RepositoryDB repository = new RepositoryDB();
         private List<Livro> listaDeLivros;
         public static int indexSelecionado;
 
-        public Form1()
+        public Form1()      
         {
           InitializeComponent();
           AtualizarDataGrid();
@@ -21,18 +19,19 @@ namespace crudTEST
         {
             try
             {
-              var formulario2 = new Form2(null);
-              formulario2.ShowDialog();
-                
-              if (formulario2.DialogResult == DialogResult.OK)
-              {
-                 repository.Adicionar(formulario2.Livro);
-                 AtualizarDataGrid();
-              }
+                var formulario2 = new Form2(null);
+                formulario2.ShowDialog();
+                  
+                if (formulario2.DialogResult == DialogResult.OK)
+                {
+                   repository.Adicionar(formulario2.Livro);
+                   AtualizarDataGrid();
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                var mensagem = $"{ex.Message}. {ex.InnerException?.Message}";
+                MessageBox.Show(mensagem);
             }
         }
 
@@ -83,7 +82,7 @@ namespace crudTEST
                 }
                 else if (dataGridView1.CurrentRow.Selected)
                 {
-                    DialogResult confirm = MessageBox.Show("Deseja Continuar?", "Excluir", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2);
+                    DialogResult confirm = MessageBox.Show("Deseja excluir o livro selecionado?", "Excluir", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2);
 
                     if (confirm.ToString().ToUpper() == "YES")
                     {
@@ -101,7 +100,6 @@ namespace crudTEST
                     MessageBox.Show("Nenhum Item Selecionado", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
-
             }
             catch (Exception ex)
             {
@@ -114,7 +112,5 @@ namespace crudTEST
             listaDeLivros = repository.BuscarTodos();
             dataGridView1.DataSource = listaDeLivros;
         }
-
-
     }
 }
