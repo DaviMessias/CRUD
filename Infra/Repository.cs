@@ -33,7 +33,7 @@ namespace crudTEST
             livroAtual = livroEditado;
             
         }
-        public Livro BuscarPorId(int Id)
+        public Livro? BuscarPorId(int Id)
         {
             var livroSelecionado = listaDeLivros.Find(x => x.Id == Id);
             return livroSelecionado;

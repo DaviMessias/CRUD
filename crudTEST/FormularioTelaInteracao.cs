@@ -1,16 +1,18 @@
 using System.ComponentModel;
 using Dominio;
+using Infra;
 
 namespace crudTEST
 {
-    public partial class Form1 : Form
+    public partial class FormularioTelaInteracao : Form
     {
-        private RepositoryDB repository = new RepositoryDB();
+        private readonly IRepository _repository;
         private List<Livro> listaDeLivros;
         public static int indexSelecionado;
 
-        public Form1()      
+        public FormularioTelaInteracao(IRepository repository)      
         {
+            _repository = repository;
           InitializeComponent();
           AtualizarDataGrid();
         }
@@ -19,12 +21,12 @@ namespace crudTEST
         {
             try
             {
-                var formulario2 = new Form2(null);
+                var formulario2 = new FormularioUsuarioEdicao(null);
                 formulario2.ShowDialog();
                   
                 if (formulario2.DialogResult == DialogResult.OK)
                 {
-                   repository.Adicionar(formulario2.Livro);
+                   _repository.Adicionar(formulario2.Livro);
                    AtualizarDataGrid();
                 }
             }
@@ -41,7 +43,7 @@ namespace crudTEST
             {
                 if (listaDeLivros.Count == 0)
                 {
-                    MessageBox.Show("Não há livros para editar!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Não há livros para editar.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
@@ -50,13 +52,13 @@ namespace crudTEST
                     if (dataGridView1.CurrentRow.Selected)
                     {
                         var idSelecionado = Convert.ToInt32(dataGridView1.CurrentRow.Cells[0].Value);
-                        var livroSelecionado = repository.BuscarPorId(idSelecionado);
-                        Form2 frm2 = new Form2(livroSelecionado) ?? throw new Exception("erro ao selecionar livro");
+                        var livroSelecionado = _repository.BuscarPorId(idSelecionado);
+                        FormularioUsuarioEdicao frm2 = new FormularioUsuarioEdicao(livroSelecionado) ?? throw new Exception("erro ao selecionar livro");
 
                         frm2.ShowDialog();
                         if (frm2.DialogResult == DialogResult.OK)
                         {
-                            repository.Editar(frm2.Livro);
+                            _repository.Editar(frm2.Livro);
                             AtualizarDataGrid();
                         }
                     }
@@ -82,22 +84,22 @@ namespace crudTEST
                 }
                 else if (dataGridView1.CurrentRow.Selected)
                 {
-                    DialogResult confirm = MessageBox.Show("Deseja excluir o livro selecionado?", "Excluir", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2);
+                    DialogResult confirm = MessageBox.Show("Deseja excluir o livro selecionado?", "Excluir", MessageBoxButtons.YesNo, MessageBoxIcon.Error, MessageBoxDefaultButton.Button2);
 
                     if (confirm.ToString().ToUpper() == "YES")
                     {
                         int IdSelecionado = Convert.ToInt32(dataGridView1.CurrentRow.Cells[0].Value);
-                        repository.Deletar(IdSelecionado);
+                        _repository.Deletar(IdSelecionado);
                         AtualizarDataGrid();
                     }
                     else
                     {
-                        MessageBox.Show("O Livro não foi removido. ");
+                        MessageBox.Show("Nenhum livro foi removido. ", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
                 else if (dataGridView1.SelectedRows.Count == 0)
                 {
-                    MessageBox.Show("Nenhum Item Selecionado", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Nenhum Item Selecionado.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
             }
@@ -109,7 +111,7 @@ namespace crudTEST
 
         public void AtualizarDataGrid()
         {
-            listaDeLivros = repository.BuscarTodos();
+            listaDeLivros = _repository.BuscarTodos();
             dataGridView1.DataSource = listaDeLivros;
         }
     }

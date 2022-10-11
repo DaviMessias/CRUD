@@ -2,7 +2,7 @@
 
 namespace crudTEST
 {
-    partial class Form1
+    partial class FormularioTelaInteracao
     {
         /// <summary>
         ///  Required designer variable.
@@ -169,17 +169,17 @@ namespace crudTEST
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
-            // Form1
+            // FormularioTelaInteracao
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(712, 364);
+            this.ClientSize = new System.Drawing.Size(712, 444);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.btnEditar);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.label4);
-            this.Name = "Form1";
+            this.Name = "FormularioTelaInteracao";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.livroBindingSource1)).EndInit();

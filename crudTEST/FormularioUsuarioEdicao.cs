@@ -2,10 +2,10 @@
 
 namespace crudTEST
 {
-    public partial class Form2 : Form
+    public partial class FormularioUsuarioEdicao : Form
     {
         public Livro Livro { get; set; }
-        public Form2(Livro livro)
+        public FormularioUsuarioEdicao(Livro livro)
         {
             InitializeComponent();
 
@@ -34,15 +34,15 @@ namespace crudTEST
         {
             try
             {
-                    Livro.Nome = txtNome.Text;
-                    Livro.Autor = txtAutor.Text;
-                    Livro.Data = dateTimePicker1.Value;
-                    Livro.Editora = txtEditora.Text;
+                   Livro.Nome = txtNome.Text;
+                   Livro.Autor = txtAutor.Text;
+                   Livro.Data = dateTimePicker1.Value;
+                   Livro.Editora = txtEditora.Text;
 
-                  if( Validacao.ValidarCampo(Livro) == true)  
-                  {
-                    DialogResult = DialogResult.OK;
-                  }
+                   if( Validacao.ValidarCampo(Livro) == true)  
+                   {
+                     DialogResult = DialogResult.OK;
+                   }
             }
             catch (Exception ex)
             {

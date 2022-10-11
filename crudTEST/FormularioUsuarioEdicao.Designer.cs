@@ -1,6 +1,6 @@
 ﻿namespace crudTEST
 {
-    partial class Form2
+    partial class FormularioUsuarioEdicao
     {
         /// <summary>
         /// Required designer variable.
@@ -127,11 +127,11 @@
             this.dateTimePicker1.Size = new System.Drawing.Size(146, 27);
             this.dateTimePicker1.TabIndex = 10;
             // 
-            // Form2
+            // FormularioUsuarioEdicao
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(359, 376);
+            this.ClientSize = new System.Drawing.Size(444, 376);
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.btnEditar);
             this.Controls.Add(this.btnSalvar);
@@ -142,7 +142,7 @@
             this.Controls.Add(this.txtEditora);
             this.Controls.Add(this.txtAutor);
             this.Controls.Add(this.txtNome);
-            this.Name = "Form2";
+            this.Name = "FormularioUsuarioEdicao";
             this.Text = "Form2";
             this.ResumeLayout(false);
             this.PerformLayout();
