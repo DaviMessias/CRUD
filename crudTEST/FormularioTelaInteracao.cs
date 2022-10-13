@@ -4,7 +4,6 @@ using Infra;
 
 namespace crudTEST
 {
-    //
     public partial class FormularioTelaInteracao : Form
     {
         private readonly IRepository _repository;
