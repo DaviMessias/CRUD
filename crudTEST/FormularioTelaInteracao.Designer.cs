@@ -180,6 +180,7 @@ namespace crudTEST
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.label4);
             this.Name = "FormularioTelaInteracao";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.livroBindingSource1)).EndInit();

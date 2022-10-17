@@ -55,3 +55,4 @@ C:\Users\Usuario\Desktop\CRUD\crudTEST\obj\Debug\net6.0-windows\refint\TelaUsuar
 C:\Users\Usuario\Desktop\CRUD\crudTEST\obj\Debug\net6.0-windows\TelaUsuario.pdb
 C:\Users\Usuario\Desktop\CRUD\crudTEST\obj\Debug\net6.0-windows\TelaUsuario.genruntimeconfig.cache
 C:\Users\Usuario\Desktop\CRUD\crudTEST\obj\Debug\net6.0-windows\ref\TelaUsuario.dll
+C:\Users\Usuario\Desktop\CRUD\crudTEST\bin\Debug\net6.0-windows\linq2db.dll
