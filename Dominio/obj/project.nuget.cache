@@ -1,8 +1,18 @@
 {
   "version": 2,
-  "dgSpecHash": "RZ3VYRs9QJMdyukIzm/+vVE+pjXdSDeu78Ml0kAvLvwz34A1KkVP3AY2E8BevELNTnPJnJuvxFhcB9UT99nRkg==",
+  "dgSpecHash": "SrAe9gq848JNiNHqFrSEQNrSRFO6uXoJfFklVBRSFYs7CRT0mn+2CZmrNpmaP+dKFSlrPvNVPkjuagdvbH0cUQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\Usuario\\Desktop\\CRUD\\Dominio\\Dominio.csproj",
-  "expectedPackageFiles": [],
-  "logs": []
+  "expectedPackageFiles": [
+    "C:\\Users\\Usuario\\.nuget\\packages\\linq2db\\4.3.0\\linq2db.4.3.0.nupkg.sha512",
+    "C:\\Users\\Usuario\\.nuget\\packages\\linq2db.sqlserver\\4.3.0\\linq2db.sqlserver.4.3.0.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problema ao ler o arquivo de cache C:\\Users\\Usuario\\Desktop\\CRUD\\Dominio\\obj\\project.nuget.cache: Invalid property identifier character: <. Path 'version', line 3, position 0."
+    }
+  ]
 }

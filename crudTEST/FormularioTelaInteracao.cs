@@ -8,13 +8,12 @@ namespace crudTEST
     {
         private readonly IRepository _repository;
         private List<Livro> listaDeLivros;
-        public static int indexSelecionado;
 
         public FormularioTelaInteracao(IRepository repository)      
         {
             _repository = repository;
-          InitializeComponent();
-          AtualizarDataGrid();
+            InitializeComponent();
+            AtualizarDataGrid();
         }
 
         private void AoClicarEmAdicionar(object sender, EventArgs e)
@@ -27,7 +26,6 @@ namespace crudTEST
                 if (formulario2.DialogResult == DialogResult.OK)
                 {
                    _repository.Adicionar(formulario2.Livro);
-                   AtualizarDataGrid();
                 }
             }
             catch (Exception ex)
@@ -35,6 +33,7 @@ namespace crudTEST
                 var mensagem = $"{ex.Message}. {ex.InnerException?.Message}";
                 MessageBox.Show(mensagem);
             }
+            AtualizarDataGrid();
         }
 
         private void AoClicarEmEditar(object sender, EventArgs e)
@@ -47,8 +46,6 @@ namespace crudTEST
                 }
                 else
                 {
-                    indexSelecionado = dataGridView1.CurrentRow.Index;
-
                     if (dataGridView1.CurrentRow.Selected)
                     {
                         var idSelecionado = Convert.ToInt32(dataGridView1.CurrentRow.Cells[0].Value);
@@ -72,6 +69,7 @@ namespace crudTEST
             {
                 MessageBox.Show(ex.Message);
             }
+            AtualizarDataGrid();
         }
 
         private void AoClicarEmExcluir(object sender, EventArgs e)
@@ -112,6 +110,7 @@ namespace crudTEST
         public void AtualizarDataGrid()
         {
             listaDeLivros = _repository.BuscarTodos();
+            dataGridView1.DataSource = null;
             dataGridView1.DataSource = listaDeLivros;
         }
     }

@@ -43,6 +43,16 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
+          "dependencies": {
+            "linq2db": {
+              "target": "Package",
+              "version": "[4.3.0, )"
+            },
+            "linq2db.SqlServer": {
+              "target": "Package",
+              "version": "[4.3.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -113,7 +123,15 @@
             },
             "System.Data.SqlClient": {
               "target": "Package",
-              "version": "[4.8.3, )"
+              "version": "[4.8.4, )"
+            },
+            "linq2db": {
+              "target": "Package",
+              "version": "[4.3.0, )"
+            },
+            "linq2db.SqlServer": {
+              "target": "Package",
+              "version": "[4.3.0, )"
             }
           },
           "imports": [
