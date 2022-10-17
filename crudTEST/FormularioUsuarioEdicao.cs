@@ -50,12 +50,11 @@ namespace crudTEST
             }
         }
 
-
         private void AoClicarEmCancelar(object sender, EventArgs e)
         {
             try
             {
-                DialogResult confirm = MessageBox.Show("Deseja Cancelar?", "Cancelar", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2);
+                DialogResult confirm = MessageBox.Show("Cencelar Operação?", "Cancelar", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
 
                 if (confirm.ToString().ToUpper() == "YES")
                 {

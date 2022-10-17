@@ -29,7 +29,7 @@ namespace crudTEST
         {
             return Host.CreateDefaultBuilder()
                 .ConfigureServices((context, services) => {
-                    services.AddScoped<IRepository, RepositoryDB>();
+                    services.AddScoped<IRepository, RepositoryLINQ>();
                 });
         }
     }

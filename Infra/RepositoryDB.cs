@@ -52,7 +52,7 @@ namespace crudTEST
                 }
                 catch (Exception ex)
                 {
-                    throw new Exception("Erro : " + ex.Message);
+                    throw new Exception("Erro ao adicionar livro", ex);
                 }
             }
         }
@@ -120,7 +120,7 @@ namespace crudTEST
                 }
             }
 
-            return lista[0];
+           return lista[0];
         }
 
     }
