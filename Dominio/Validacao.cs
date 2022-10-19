@@ -10,7 +10,7 @@ namespace Dominio
     {
         public static bool ValidarCampo(Livro livro)
         {
-            if ( livro.Nome.Equals(String.Empty))
+            if (livro.Nome.Equals(String.Empty))
             {
                 throw new Exception("Nome inválido");
             } 
