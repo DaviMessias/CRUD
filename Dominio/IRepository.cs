@@ -9,11 +9,11 @@ namespace Infra
 {
     public interface IRepository
     {
-        List<Livro> BuscarTodos();
-        Livro? BuscarPorId(int Id);
         void Adicionar(Livro livro);
         void Editar(Livro livroEditado);
         void Deletar(int Id);
+        List<Livro> BuscarTodos();
+        Livro? BuscarPorId(int Id);
 
     }
 }
