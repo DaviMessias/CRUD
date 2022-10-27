@@ -19,7 +19,7 @@ namespace crudTEST
 
         public void Deletar(int Id)
         {
-            Livro livro = BuscarPorId(Id);
+            Livro livro = BuscarPorId(Id) ?? throw new Exception();
             listaDeLivros.Remove(livro);
         }
 
