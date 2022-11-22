@@ -10,7 +10,7 @@ namespace crudTEST
 {
     public class Repository : IRepository
     {
-        protected List<Livro> listaDeLivros = Singleton.Instance();
+        public List<Livro> listaDeLivros = Singleton.Instance();
 
         public void Adicionar(Livro livro)
         { 
@@ -19,7 +19,7 @@ namespace crudTEST
 
         public void Deletar(int Id)
         {
-            Livro livro = BuscarPorId(Id);
+            Livro livro = BuscarPorId(Id) ?? throw new Exception();
             listaDeLivros.Remove(livro);
         }
 

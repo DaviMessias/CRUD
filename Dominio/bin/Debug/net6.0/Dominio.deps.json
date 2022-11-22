@@ -7,11 +7,6 @@
   "targets": {
     ".NETCoreApp,Version=v6.0": {
       "Dominio/1.0.0": {
-<<<<<<< HEAD
-        "runtime": {
-          "Dominio.dll": {}
-        }
-=======
         "dependencies": {
           "FluentMigrator": "3.3.2",
           "FluentMigrator.Runner": "3.3.2",
@@ -770,7 +765,6 @@
             "fileVersion": "4.700.19.56404"
           }
         }
->>>>>>> e9f85d05de318640322dd58f33cbcc2abb056b36
       }
     }
   },
@@ -779,8 +773,6 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
-<<<<<<< HEAD
-=======
     },
     "FluentMigrator/3.3.2": {
       "type": "package",
@@ -1215,7 +1207,6 @@
       "sha512": "sha512-CeWTdRNfRaSh0pm2gDTJFwVaXfTq6Xwv/sA887iwPTneW7oMtMlpvDIO+U60+3GWTB7Aom6oQwv5VZVUhQRdPQ==",
       "path": "system.windows.extensions/4.7.0",
       "hashPath": "system.windows.extensions.4.7.0.nupkg.sha512"
->>>>>>> e9f85d05de318640322dd58f33cbcc2abb056b36
     }
   }
 }
