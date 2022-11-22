@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>Infra</id>
+    <version>1.0.0</version>
+    <authors>Infra</authors>
+    <description>Package Description</description>
+    <dependencies>
+      <group targetFramework="net6.0">
+        <dependency id="Dominio" version="1.0.0" exclude="Build,Analyzers" />
+        <dependency id="FluentMigrator" version="3.3.2" exclude="Build,Analyzers" />
+        <dependency id="FluentMigrator.Runner" version="3.3.2" exclude="Build,Analyzers" />
+        <dependency id="FluentMigrator.Runner.SQLite" version="3.3.2" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Data.Sqlite" version="6.0.10" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Extensions.Hosting.Abstractions" version="6.0.0" exclude="Build,Analyzers" />
+        <dependency id="System.Configuration.ConfigurationManager" version="6.0.1" exclude="Build,Analyzers" />
+        <dependency id="System.Data.SqlClient" version="4.8.4" exclude="Build,Analyzers" />
+        <dependency id="linq2db" version="4.3.0" exclude="Build,Analyzers" />
+        <dependency id="linq2db.SqlServer" version="4.3.0" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="C:\Users\Usuario\Desktop\CRUD\Infra\bin\Debug\net6.0\Infra.dll" target="lib\net6.0\Infra.dll" />
+  </files>
+</package>

@@ -5,7 +5,7 @@ using System.Configuration;
 
 namespace Infra
 {
-    public class RepositoryLINQ : IRepository
+    public class  RepositoryLINQ : IRepository
     {
         public static string ConexaoLinq()
         {
