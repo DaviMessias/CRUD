@@ -1,9 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Dominio;
 using Infra;
 using System.Net;
-using System.Security.Cryptography.X509Certificates;
 
 namespace CadastroLivro.Api.Controller
 {
