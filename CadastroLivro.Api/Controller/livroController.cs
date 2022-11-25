@@ -15,7 +15,7 @@ namespace CadastroLivro.Api.Controller
             {
                 _repository = repository;
             }
-
+        
         [HttpGet]
         public ActionResult BuscarTodos()
         {
@@ -36,20 +36,18 @@ namespace CadastroLivro.Api.Controller
             try
             {
                 var livroSelecionado = _repository.BuscarPorId(id);
-
                 if (livroSelecionado == null)
                 {
-                    return NotFound();
+                    return NotFound("Livro não foi encontrado para busca");
                 }
                 else
                 {
-                    return livroSelecionado;
-
+                    return Ok(livroSelecionado);
                 }
             }
             catch(Exception ex)
             {
-                return BadRequest(ex.Message);
+                return NotFound(ex.Message);
             }
         }
 
@@ -87,7 +85,10 @@ namespace CadastroLivro.Api.Controller
             try
             {
                 var livroDeletado = BuscarPorId(id);
-            
+                if(livroDeletado.Value == null)
+                {
+                    return NotFound("Livro não encontrado para exclusão");
+                }
                 _repository.Deletar(id);
                 return Ok("Livro deletado com sucesso");
             }
@@ -96,8 +97,5 @@ namespace CadastroLivro.Api.Controller
                 return BadRequest(ex.Message);
             }
         }
-        
-
-
     }
 }

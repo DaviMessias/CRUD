@@ -63,7 +63,7 @@ namespace Infra
             }
             catch (Exception ex)
             {
-                throw new Exception("O livro não foi encontrado", ex);
+                throw new Exception("Livro não foi encontrado para busca", ex);
             }
         }
 
