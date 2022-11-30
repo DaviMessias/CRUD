@@ -9,6 +9,10 @@
       "PackagePath": "staticwebassets\\controller\\App.controller.js"
     },
     {
+      "Id": "C:\\Users\\Usuario\\Desktop\\CRUD\\CadastroLivro.Api\\wwwroot\\controller\\Cadastro.controller.js",
+      "PackagePath": "staticwebassets\\controller\\Cadastro.controller.js"
+    },
+    {
       "Id": "C:\\Users\\Usuario\\Desktop\\CRUD\\CadastroLivro.Api\\wwwroot\\controller\\Detalhes.controller.js",
       "PackagePath": "staticwebassets\\controller\\Detalhes.controller.js"
     },
@@ -41,16 +45,16 @@
       "PackagePath": "staticwebassets\\view\\App.view.xml"
     },
     {
+      "Id": "C:\\Users\\Usuario\\Desktop\\CRUD\\CadastroLivro.Api\\wwwroot\\view\\Cadastro.view.xml",
+      "PackagePath": "staticwebassets\\view\\Cadastro.view.xml"
+    },
+    {
       "Id": "C:\\Users\\Usuario\\Desktop\\CRUD\\CadastroLivro.Api\\wwwroot\\view\\Detalhes.view.xml",
       "PackagePath": "staticwebassets\\view\\Detalhes.view.xml"
     },
     {
       "Id": "C:\\Users\\Usuario\\Desktop\\CRUD\\CadastroLivro.Api\\wwwroot\\view\\Lista.view.xml",
       "PackagePath": "staticwebassets\\view\\Lista.view.xml"
-    },
-    {
-      "Id": "C:\\Users\\Usuario\\Desktop\\CRUD\\CadastroLivro.Api\\wwwroot\\view\\Overview.view.xml",
-      "PackagePath": "staticwebassets\\view\\Overview.view.xml"
     },
     {
       "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.CadastroLivro.Api.Microsoft.AspNetCore.StaticWebAssets.props",

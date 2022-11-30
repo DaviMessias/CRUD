@@ -41,12 +41,17 @@ return Controller.extend("sap.ui.demo.walkthrough.controller.App", {
     },
 
     
-    aoPressionar: function () {
-            var oItem = oEvent.getSource();
-			var oRouter = this.getOwnerComponent().getRouter();
-			oRouter.navTo("detalhes", {
-				id: window.encodeURIComponent(oItem.getBindingContext("listaDosLivros").getProperty('id'))
-			});
+    aoPressionarLivro: function (oEvent) {
+        var oItem = oEvent.getSource();
+        var oRouter = this.getOwnerComponent().getRouter();
+        oRouter.navTo("detalhes", {
+            id: window.encodeURIComponent(oItem.getBindingContext("listaDosLivros").getProperty('id'))
+        });
+    },
+
+    aoClicarEmCadastrar: function(oEvent){
+        var oRouter = this.getOwnerComponent().getRouter();
+			oRouter.navTo("cadastroDeLivros")
     }
 
     });

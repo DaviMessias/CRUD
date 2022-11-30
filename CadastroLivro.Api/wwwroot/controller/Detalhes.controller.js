@@ -1,45 +1,55 @@
 sap.ui.define([
-	"sap/ui/model/json/JSONModel",
-	
 	"sap/ui/core/mvc/Controller",
-], function (Controller,JSONModel,) {
+	"sap/ui/model/json/JSONModel"
+], function (Controller, JSONModel) {
 	"use strict";
 
-	return Controller.extend("sap.ui.demo.walkthrough.controller.Detail", {
+	return Controller.extend("sap.ui.demo.walkthrough.controller.Detalhes", {
 
 		onInit: function () {
-			this.exibirLivroSelecionado();
-			
+			this.getOwnerComponent();
+			var oRouter = this.getOwnerComponent().getRouter();
+			oRouter.getRoute("detalhes").attachPatternMatched(this._onObjectMatched, this);
 		},
-		
-		aoSelecionarLivro: function (oEvent) {
-            var idParametro = window.decodeURIComponent(oEvent.getParameter("arguments").id);
-            this.carregarLivros(idParametro);
-		},
-		
-		exibirLivroSelecionado : function(){
 
-			let livroRetornado = this.buscarLivroSelecionado();
-			livroRetornado.then(lista =>{
-				let modelo = new JSONModel(lista)
-				this.getView().setModel(modelo, "livro")
+
+		_onObjectMatched: function (oEvent) {
+			var salvarId = window.decodeURIComponent(oEvent.getParameter("arguments").id);
+				this.exibirLivroSelecionado(salvarId);
+		},
+
+		
+		exibirLivroSelecionado : function(idLivro){
+
+			this.buscarLivroSelecionado(idLivro)
+				.then(livroDoBanco => {
+				let livro = new JSONModel(livroDoBanco)
+				this.getView().setModel(livro, "Livro")
+
 			})
-
 		},
 	
-		buscarLivroSelecionado : async function(idLivro){
+		buscarLivroSelecionado: async function(idLivro){
 			
-			let livroSelecionado = await fetch(`https://localhost:7187/api/livro/${idLivro}`)
-			.then(response => response.json())
-			.then(data => console.log(data))
-	
-			return livroSelecionado
-		},
+			return await fetch(`https://localhost:7187/api/livro/${idLivro}`)
+			.then(res => res.json())
 
+			
+		},
 		aoClicarEmBotaoVoltar: function () {
 			
 				var oRouter = this.getOwnerComponent().getRouter();
 				oRouter.navTo("lista");
-			}
+		},
+
+		aoPressionarEditar : function(oEvent){
+				var oRouter = this.getOwnerComponent().getRouter();
+				oRouter.navTo("editar");
+		},
+
+		aoPressionarExcluir : function(){
+			var oRouter = this.getOwnerComponent().getRouter();
+			oRouter.navTo("lista");
+		}
 	});
 });

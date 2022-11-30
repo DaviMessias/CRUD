@@ -2,64 +2,56 @@
 	controllerName="sap.ui.demo.walkthrough.controller.Lista"
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns:core="sap.ui.core"
+	xmlns:form="sap.ui.layout.form"
 	xmlns="sap.m">
-	<Panel accessibleRole="Region">
-	<Table 
-		id="Lista"
-		items="{
-        path: 'listaDosLivros>/',
-        sorter: {
-            path: 'autor',
-            group: true
-        }
-        }">
-		<headerToolbar>
-					<Toolbar>
-							<Title/>
-							<ToolbarSpacer/>
-							<SearchField width="45%" search=".aoFiltrarLivros"/>
-					</Toolbar>
-		</headerToolbar>
-		<columns>
-		
-        <Column>
-            <Text text="{i18n>titulo}"/>
-        </Column>
-        <Column>
-            <Text text="{i18n>editora}"/>
-        </Column>
-        <Column>
-            <Text text="{i18n>data}"/>
-        </Column>
-        <Column>
-            <Text text="{i18n>autor}"/>
-        </Column>
-       
-    </columns>
-		<items>
+	<Page
+		title="{i18n>tituloTelaInicial}">
+			<Table 
+				id="Lista"
+				items="{
+				path: 'listaDosLivros>/',
+				sorter: {
+					path: 'autor',
+					group: true
+				}
+				}">
+				<headerToolbar>
+							<Toolbar>
+									<Title/>
+									<Button id="botaoCadastrar" text="{i18n>botaoCadastrar}" press=".aoClicarEmCadastrar" />
+									<ToolbarSpacer/>
+									<SearchField width="45%" search=".aoFiltrarLivros"/>
+							</Toolbar>
+				</headerToolbar>
+				<columns>
+				
+				<Column>
+					<Text text="{i18n>titulo}"/>
+				</Column>
+				<Column>
+					<Text text="{i18n>editora}"/>
+				</Column>
+				<Column>
+					<Text text="{i18n>autor}"/>
+				</Column>
+				<Column>
+					<Text text="{i18n>data}"/>
+				</Column>
 			
-			<ColumnListItem
-				type="Navigation"
-				press="aoPressionar">
-				<cells>
-					<Text text="{listaDosLivros>nome}"/>
-					<Text text="{listaDosLivros>id}"/>
-					<Text text="{listaDosLivros>editora}"/>
-					<Text text="{listaDosLivros>data}"/>
-					<Text text="{
-							path: 'listaDosLivros>autor',
-							type: 'sap.ui.model.type.DateTime',
-							formatOptions: {
-								style: 'short',
-								source: {
-								pattern: 'yyyy-MM-ddTHH:mm:ss'
-								}
-							}
-						}" 
-						/>
-				</cells>
-			</ColumnListItem>
-		</items>
-    </Table>
-	</Panel>
+			</columns>
+				<items>
+					
+					<ColumnListItem
+						type="Navigation"
+						press="aoPressionarLivro">
+						<cells>
+							<Text text="{listaDosLivros>nome}"/>
+							<Text text="{listaDosLivros>editora}"/>
+							<Text text="{listaDosLivros>autor}"/>
+							<Text text="{listaDosLivros>data}"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+	</Page>
 </mvc:View>

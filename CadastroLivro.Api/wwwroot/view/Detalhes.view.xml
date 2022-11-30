@@ -1,18 +1,28 @@
 <mvc:View
+	height="100%"
 	controllerName="sap.ui.demo.walkthrough.controller.Detalhes"
-	xmlns="sap.m"
-	xmlns:mvc="sap.ui.core.mvc">
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m">
 	<Page
-		title="{i18n>detalhesPaginaTitulo}"
+		title="{i18n>tituloDetalhes}"
 		showNavButton= "true"
 		navButtonPress= ".aoClicarEmBotaoVoltar">
-		<ObjectHeader
-			responsive="true"
-			fullScreenOptimized="true">
-			<attributes>
-				<ObjectAttribute text="{livro>/editora}" ></ObjectAttribute>
-			</attributes>
-		</ObjectHeader>
+				<headerContent>
+					<Button id="editar" text="Editar" enabled="true" press="aoPressionarEditar"/>
+					<Button id="excluir" text="Excluir" visible="true" press="aoPressionarExcluir"/>
+				</headerContent>
+		
+				<List
+					headerText="{Livro>/nome}" >
+					<DisplayListItem
+						label="Autor"
+						value="{Livro>/autor}" />
+					<DisplayListItem
+						label="Editora"
+						value="{Livro>/editora}" />
+					<DisplayListItem
+						label="Data de Publicação"
+						value= "{Livro>/data}" />
+				</List>
 	</Page>
 </mvc:View>
-
