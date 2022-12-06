@@ -25,12 +25,12 @@ namespace Infra
             }
         }
 
-        public void Editar(Livro livroEditado)
+        public void Editar(Livro livroASerEditado)
         {
             using var db = SqlServerTools.CreateDataConnection(ConexaoLinq());
             try
             {
-                db.Update(livroEditado);
+                db.Update(livroASerEditado);
             }
             catch (Exception ex)
             {

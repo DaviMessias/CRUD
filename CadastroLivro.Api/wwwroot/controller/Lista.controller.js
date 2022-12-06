@@ -49,9 +49,9 @@ return Controller.extend("sap.ui.demo.walkthrough.controller.App", {
         });
     },
 
-    aoClicarEmCadastrar: function(oEvent){
+    aoClicarEmCadastrar: function(){
         var oRouter = this.getOwnerComponent().getRouter();
-			oRouter.navTo("cadastroDeLivros")
+		    oRouter.navTo("cadastroDeLivros")
     }
 
     });

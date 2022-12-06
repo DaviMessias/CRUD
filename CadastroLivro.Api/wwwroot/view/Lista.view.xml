@@ -26,7 +26,7 @@
 				<columns>
 				
 				<Column>
-					<Text text="{i18n>titulo}"/>
+					<Text text="{i18n>nome}"/>
 				</Column>
 				<Column>
 					<Text text="{i18n>editora}"/>

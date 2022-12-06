@@ -68,7 +68,7 @@
 			"target": "cadastroDeLivros"
 		  },
 		  {
-			"pattern":"cadastroDeLivros/{id}",
+			"pattern":"editar/{id}",
 			"name" : "editar",
 			"target": "cadastroDeLivros"
 		  }

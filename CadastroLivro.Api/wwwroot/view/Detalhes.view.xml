@@ -15,6 +15,9 @@
 				<List
 					headerText="{Livro>/nome}" >
 					<DisplayListItem
+						label="ID"
+						value="{Livro>/id}" />
+					<DisplayListItem
 						label="Autor"
 						value="{Livro>/autor}" />
 					<DisplayListItem

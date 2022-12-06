@@ -1,7 +1,8 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
-	"sap/ui/model/json/JSONModel"
-], function (Controller, JSONModel) {
+	"sap/ui/model/json/JSONModel",
+	"sap/m/MessageToast"
+], function (Controller, JSONModel, MessageToast) {
 	"use strict";
 
 	return Controller.extend("sap.ui.demo.walkthrough.controller.Detalhes", {
@@ -9,11 +10,11 @@ sap.ui.define([
 		onInit: function () {
 			this.getOwnerComponent();
 			var oRouter = this.getOwnerComponent().getRouter();
-			oRouter.getRoute("detalhes").attachPatternMatched(this._onObjectMatched, this);
+			oRouter.getRoute("detalhes").attachPatternMatched(this._aoCoincidirObjeto , this);
 		},
 
 
-		_onObjectMatched: function (oEvent) {
+		_aoCoincidirObjeto : function (oEvent) {
 			var salvarId = window.decodeURIComponent(oEvent.getParameter("arguments").id);
 				this.exibirLivroSelecionado(salvarId);
 		},
@@ -33,8 +34,6 @@ sap.ui.define([
 			
 			return await fetch(`https://localhost:7187/api/livro/${idLivro}`)
 			.then(res => res.json())
-
-			
 		},
 		aoClicarEmBotaoVoltar: function () {
 			
@@ -42,14 +41,26 @@ sap.ui.define([
 				oRouter.navTo("lista");
 		},
 
-		aoPressionarEditar : function(oEvent){
+		aoPressionarEditar : function(){
+				var idLivroASerEditado = this.getView().getModel("Livro").getData().id
 				var oRouter = this.getOwnerComponent().getRouter();
-				oRouter.navTo("editar");
+				oRouter.navTo("editar", {
+					id: idLivroASerEditado
+				});
+				
 		},
 
-		aoPressionarExcluir : function(){
-			var oRouter = this.getOwnerComponent().getRouter();
-			oRouter.navTo("lista");
+		aoPressionarExcluir : async function(){
+				//var oRouter = this.getOwnerComponent().getRouter();
+
+				let LivroASerDeletado = this.getView().getModel("Livro").getData();
+				let idLivroASerDeletado = LivroASerDeletado.id
+
+				 fetch(`https://localhost:7187/api/livro/${idLivroASerDeletado}`, {
+					method: 'DELETE'
+					})
+
+				MessageToast.show("Livro deletado");
 		}
 	});
 });

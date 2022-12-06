@@ -65,15 +65,15 @@ namespace CadastroLivro.Api.Controller
             }
         }
 
-        [HttpPut]
-        public ActionResult Editar([FromBody]Livro livroEditado)
+        [HttpPut("{id}")]
+        public ActionResult Editar(int id, Livro LivroASerEditado)
         {
             try
             {
-                _repository.Editar(livroEditado);
-                return Ok(livroEditado);
+                _repository.Editar(LivroASerEditado);
+                return Ok(LivroASerEditado);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
@@ -84,12 +84,9 @@ namespace CadastroLivro.Api.Controller
         {
             try
             {
-                var livroDeletado = BuscarPorId(id);
-                if(livroDeletado.Value == null)
-                {
-                    return NotFound("Livro não encontrado para exclusão");
-                }
-                _repository.Deletar(id);
+                var livroASerDeletado = _repository.BuscarPorId(id);
+                _repository.Deletar(livroASerDeletado.Id);
+
                 return Ok("Livro deletado com sucesso");
             }
             catch(Exception ex)
