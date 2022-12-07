@@ -15,7 +15,8 @@
 					<l:VerticalLayout class="sapUiContentPadding" width="30%">
 						<Label text="ID" labelFor="input-id" design="Bold"/>
 						<Input id="input-id" required="true" blocked="true"
-							placeholder="Campo inacessível" />
+									placeholder="Campo inacessível"
+									value="{path : 'Livro>/id' }"  />
 
 						<Label text="Título" labelFor="input-nome" design="Bold"/>
 						<Input id="input-nome" required="true"
@@ -42,7 +43,8 @@
 										minLength: 1,
 										maxLength: 100
 											}
-									}" />
+									}" 
+									change= ".aoMudarDeCampo" />
 
 						<Label text="Editora" labelFor="input-editora" design="Bold"/>
 						<Input id="input-editora" required="true" 
@@ -55,10 +57,13 @@
 										minLength: 1,
 										maxLength: 100
 											}
-									}" />
+									}" 
+									change= ".aoMudarDeCampo" />
 									
 						<Label text="Data de Publicação" required="true" design="Bold"/>
 						<DatePicker
+								value="{Livro>/data}"
+								valueFormat= "yyyy-MM-ddTHH:mm:ss"
 								id="DP6"
 								displayFormat="short"
 								change="handleChange"

@@ -18,7 +18,7 @@
 				<headerToolbar>
 							<Toolbar>
 									<Title/>
-									<Button id="botaoCadastrar" text="{i18n>botaoCadastrar}" press=".aoClicarEmCadastrar" />
+									<Button type="Emphasized" id="botaoCadastrar" text="{i18n>botaoCadastrar}" press=".aoClicarEmCadastrar" />
 									<ToolbarSpacer/>
 									<SearchField width="45%" search=".aoFiltrarLivros"/>
 							</Toolbar>
@@ -48,7 +48,17 @@
 							<Text text="{listaDosLivros>nome}"/>
 							<Text text="{listaDosLivros>editora}"/>
 							<Text text="{listaDosLivros>autor}"/>
-							<Text text="{listaDosLivros>data}"/>
+							<Text text="{
+								path: 'listaDosLivros>data',
+								type: 'sap.ui.model.type.Date',
+								formatOptions: {
+									style: 'short',
+									source: {
+										pattern: 'yyyy-MM-ddTHH:mm:ss'
+									}
+								}
+							}"
+							/>
 						</cells>
 					</ColumnListItem>
 				</items>
