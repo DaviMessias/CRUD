@@ -1,9 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Dominio;
 using Infra;
 using System.Net;
-using System.Security.Cryptography.X509Certificates;
 
 namespace CadastroLivro.Api.Controller
 {
@@ -17,7 +15,7 @@ namespace CadastroLivro.Api.Controller
             {
                 _repository = repository;
             }
-
+        
         [HttpGet]
         public ActionResult BuscarTodos()
         {
@@ -38,20 +36,18 @@ namespace CadastroLivro.Api.Controller
             try
             {
                 var livroSelecionado = _repository.BuscarPorId(id);
-
                 if (livroSelecionado == null)
                 {
-                    return NotFound();
+                    return NotFound("Livro não foi encontrado para busca");
                 }
                 else
                 {
-                    return livroSelecionado;
-
+                    return Ok(livroSelecionado);
                 }
             }
             catch(Exception ex)
             {
-                return BadRequest(ex.Message);
+                return NotFound(ex.Message);
             }
         }
 
@@ -69,15 +65,15 @@ namespace CadastroLivro.Api.Controller
             }
         }
 
-        [HttpPut]
-        public ActionResult Editar([FromBody]Livro livroEditado)
+        [HttpPut("{id}")]
+        public ActionResult Editar(int id, Livro LivroASerEditado)
         {
             try
             {
-                _repository.Editar(livroEditado);
-                return Ok(livroEditado);
+                _repository.Editar(LivroASerEditado);
+                return Ok(LivroASerEditado);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
@@ -88,9 +84,9 @@ namespace CadastroLivro.Api.Controller
         {
             try
             {
-                var livroDeletado = BuscarPorId(id);
-            
-                _repository.Deletar(id);
+                var livroASerDeletado = _repository.BuscarPorId(id);
+                _repository.Deletar(livroASerDeletado.Id);
+
                 return Ok("Livro deletado com sucesso");
             }
             catch(Exception ex)
@@ -98,8 +94,5 @@ namespace CadastroLivro.Api.Controller
                 return BadRequest(ex.Message);
             }
         }
-        
-
-
     }
 }

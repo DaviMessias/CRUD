@@ -1,0 +1,67 @@
+<mvc:View
+	controllerName="sap.ui.demo.walkthrough.controller.Lista"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core"
+	xmlns:form="sap.ui.layout.form"
+	xmlns="sap.m">
+	<Page
+		title="{i18n>tituloTelaInicial}">
+			<Table 
+				id="Lista"
+				items="{
+				path: 'listaDosLivros>/',
+				sorter: {
+					path: 'autor',
+					group: true
+				}
+				}">
+				<headerToolbar>
+							<Toolbar>
+									<Title/>
+									<Button type="Emphasized" id="botaoCadastrar" text="{i18n>botaoCadastrar}" press=".aoClicarEmCadastrar" />
+									<ToolbarSpacer/>
+									<SearchField width="45%" search=".aoFiltrarLivros"/>
+							</Toolbar>
+				</headerToolbar>
+				<columns>
+				
+				<Column>
+					<Text text="{i18n>nome}"/>
+				</Column>
+				<Column>
+					<Text text="{i18n>editora}"/>
+				</Column>
+				<Column>
+					<Text text="{i18n>autor}"/>
+				</Column>
+				<Column>
+					<Text text="{i18n>data}"/>
+				</Column>
+			
+			</columns>
+				<items>
+					
+					<ColumnListItem
+						type="Navigation"
+						press="aoPressionarLivro">
+						<cells>
+							<Text text="{listaDosLivros>nome}"/>
+							<Text text="{listaDosLivros>editora}"/>
+							<Text text="{listaDosLivros>autor}"/>
+							<Text text="{
+								path: 'listaDosLivros>data',
+								type: 'sap.ui.model.type.Date',
+								formatOptions: {
+									style: 'short',
+									source: {
+										pattern: 'yyyy-MM-ddTHH:mm:ss'
+									}
+								}
+							}"
+							/>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+	</Page>
+</mvc:View>

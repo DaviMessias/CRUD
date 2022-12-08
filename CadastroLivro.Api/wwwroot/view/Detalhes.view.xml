@@ -1,0 +1,44 @@
+<mvc:View
+	controllerName="sap.ui.demo.walkthrough.controller.Detalhes"
+	height="100%"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	displayBlock="true">
+	<Page
+		title="{i18n>tituloDetalhes}"
+		showNavButton= "true"
+		navButtonPress= ".aoClicarEmBotaoVoltar">
+				<headerContent>
+					<Button type="Reject" id="excluir" text="Excluir" visible="true" press="aoPressionarExcluir"/>
+					<Button type="Emphasized" id="editar" text="Editar" enabled="true" press="aoPressionarEditar"/>
+				</headerContent>
+		<l:VerticalLayout class="sapUiContentPadding" width="50%">	
+				<List
+					headerText="{Livro>/nome}" >
+					<DisplayListItem
+						label="ID"
+						value="{Livro>/id}" />
+					<DisplayListItem
+						label="Autor"
+						value="{Livro>/autor}" />
+					<DisplayListItem
+						label="Editora"
+						value="{Livro>/editora}" />
+					<DisplayListItem
+						label="Data de Publicação"
+						value="{
+								path: 'Livro>/data',
+								type: 'sap.ui.model.type.Date',
+								formatOptions: {
+					  			style: 'short',
+					  			source: {
+									pattern: 'yyyy-MM-ddTHH:mm:ss'
+					  			}
+							}
+				 		 }"/>
+				</List>
+		</l:VerticalLayout>
+	</Page>
+</mvc:View>

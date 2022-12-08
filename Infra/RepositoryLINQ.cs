@@ -25,12 +25,12 @@ namespace Infra
             }
         }
 
-        public void Editar(Livro livroEditado)
+        public void Editar(Livro livroASerEditado)
         {
             using var db = SqlServerTools.CreateDataConnection(ConexaoLinq());
             try
             {
-                db.Update(livroEditado);
+                db.Update(livroASerEditado);
             }
             catch (Exception ex)
             {
@@ -63,7 +63,7 @@ namespace Infra
             }
             catch (Exception ex)
             {
-                throw new Exception("O livro não foi encontrado", ex);
+                throw new Exception("Livro não foi encontrado para busca", ex);
             }
         }
 

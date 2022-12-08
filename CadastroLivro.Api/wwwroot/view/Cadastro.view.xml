@@ -1,0 +1,72 @@
+<mvc:View
+	controllerName="sap.ui.demo.walkthrough.controller.Cadastro"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:l="sap.ui.layout">
+
+	<Page 
+		title= "{i18n>tituloCadastro}"
+		showNavButton= "true"
+		navButtonPress= ".aoClicarEmBotaoVoltar">
+		<headerContent>
+			<Button text="Salvar" press=".aoPressionarSalvar" />
+		</headerContent>
+
+					<l:VerticalLayout class="sapUiContentPadding" width="30%">
+						<Label text="ID" labelFor="input-id" design="Bold"/>
+						<Input id="input-id" required="true" blocked="true"
+									placeholder="Campo inacessível"
+									value="{path : 'Livro>/id' }"  
+									/>
+
+						<Label text="Título" labelFor="input-nome" design="Bold"/>
+						<Input id="input-nome" required="true"
+									placeholder="Digite o Título" 
+									valueStateText="Título não pode estar vazio para salvar." 
+									value="{
+												path : 'Livro>/nome',
+												type : 'sap.ui.model.type.String',
+												constraints : {
+												minLength: 1,
+												maxLength: 20
+													}
+											}" />
+
+						<Label text="Autor" labelFor="input-autor" design="Bold" />
+						<Input id="input-autor" required="true"
+								placeholder="Digite o Autor" 
+								valueStateText="Autor não pode estar vazio para salvar." 
+								value="{
+										path : 'Livro>/autor',
+										type : 'sap.ui.model.type.String',
+										constraints : {
+										minLength: 1,
+										maxLength: 20
+											}
+									}" />
+
+						<Label text="Editora" labelFor="input-editora" design="Bold"/>
+						<Input id="input-editora" required="true" 
+								placeholder="Digite a Editora" 
+								valueStateText="Editora não pode estar vazio para salvar." 
+								value="{
+										path : 'Livro>/editora',
+										type : 'sap.ui.model.type.String',
+										constraints : {
+										minLength: 1,
+										maxLength: 20
+											}
+									}" />
+									
+						<Label text="Data de Publicação" required="true" design="Bold"/>
+						<DatePicker
+								value="{Livro>/data}"
+								valueFormat= "yyyy-MM-ddTHH:mm:ss"
+								id="DP6"
+								displayFormat="short"
+								change="aoMudarData"
+								class="sapUiSmallMarginBottom"/>
+				</l:VerticalLayout>
+		</Page>
+</mvc:View>
+
