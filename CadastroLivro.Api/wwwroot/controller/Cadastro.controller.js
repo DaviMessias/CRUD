@@ -1,10 +1,13 @@
     sap.ui.define([
+		"sap/ui/demo/walkthrough/controller/ValidarCampos",
         "sap/ui/core/mvc/Controller",
 		"sap/ui/model/json/JSONModel",
 		"sap/ui/core/Core",
 		"sap/m/MessageBox",
-		"sap/m/MessageToast"
-    ], function(Controller, JSONModel, Core, MessageBox, MessageToast) {
+		"sap/m/MessageToast",
+	
+
+    ], function(ValidarCampos,Controller, JSONModel,Core, MessageBox , MessageToast) {
     "use strict";
     
     return Controller.extend("sap.ui.demo.walkthrough.controller.Cadastro", {
@@ -18,13 +21,13 @@
 			oMM.registerObject(oView.byId("input-nome"), true);
 			oMM.registerObject(oView.byId("input-autor"), true);
 			oMM.registerObject(oView.byId("input-editora"), true);
+
+			
+			
 		},
 
 		_aoCoincidirObjeto : function (oEvent) {
-			if (oEvent.getParameter("name") == "editar") {
-				var salvarId = window.decodeURIComponent(oEvent.getParameter("arguments").id);
-				this.exibirLivro(salvarId);
-			} else {
+			if (oEvent.getParameter("name") == "cadastroDeLivros") {
 				let modeloLivro = new JSONModel({
 					nome: "",
 					autor: "",
@@ -35,73 +38,64 @@
 				 
 				this.byId("DP6").setMinDate(new Date(1800, 0, 1));
 			 	this.byId("DP6").setMaxDate(new Date);
-			 	this.byId("DP6").setDateValue(new Date);
-			}
-		},
-
-		validarInput: function (oInput) {
-			var valorStatus = "None";
-			var booleanValidacao = false;
-			var oBinding = oInput.getBinding("value");
-
-			try {
-				oBinding.getType().validateValue(oInput.getValue());
-			} catch (oException) {
-				valorStatus = "Error";
-				booleanValidacao = true;
-			}
-
-			oInput.setValueState(valorStatus);
-
-			return booleanValidacao;
-		},
-
-		aoSalvar: function () {
-			// coleta os controles de entrada
-			var oView = this.getView(),
-				aInputs = [
-				oView.byId("input-nome"),
-				oView.byId("input-autor"),
-				oView.byId("input-editora"),
 				
-			],
-				booleanValidacao = false;
-
-			// verifica se as entradas não estão vazias.
-			// A validação não ocorre durante a vinculação de dados, pois ela é acionada apenas por ações do usuário.
-
-			aInputs.forEach(function (oInput) {
-				booleanValidacao = this.validarInput(oInput) || booleanValidacao;
-			}, this);
-
-			if (!booleanValidacao) {
-
-				if(!oView.byId("DP6").isValidValue()){
-					MessageBox.alert("Data Inválida");
-				 }
-				 
 			} else {
-				MessageBox.alert("Ocorreu um erro de validação. Complete todos os campos primeiro.");
+				var salvarId = window.decodeURIComponent(oEvent.getParameter("arguments").id);
+				this.exibirLivro(salvarId);
 			}
 		},
 		
 		aoPressionarSalvar: async function () {
 
-			this.aoSalvar()
-			this.validarInput();
+		//	let data= "DP6"
+			let livro = this.getView().getModel("Livro").getData();	
+
+			//primeiro validar campos para salvar/editar
+			var validacao = new ValidarCampos();
+
+			// collect input controls
+			var oView = this.getView(),
+				aInputs = [
+				oView.byId("input-nome"),
+				oView.byId("input-autor"),
+				oView.byId("input-editora"),
+			],
+				falhaValidacao = false;
+
+			var dataRecebida = this.getView().byId("DP6");
+
+			// Check that inputs are not empty.
+			// Validation does not happen during data binding as this is only triggered by user actions.
+			aInputs.forEach(function (oInput) {
+				falhaValidacao = validacao.validarEntrada(oInput) || falhaValidacao;
+			}, this);
+
+			falhaValidacao = validacao.validarData(dataRecebida) || falhaValidacao;
 			
-			let livro = this.getView().getModel("Livro").getData();
-			if(!livro.id){
-				this.criarLivro();
-			}else{
-				this.editarLivro();
+
+			if (!falhaValidacao) {
+						if(!livro.id){
+							this.criarLivro();
+						}else{
+							this.editarLivro();
+						}
+			} else {
+				MessageBox.alert("Ocorreu um erro de validação. Complete todos os campos primeiro.");
 			}
-			var oRouter = this.getOwnerComponent().getRouter();
-			oRouter.navTo("lista");
+
+			//let livro = this.getView().getModel("Livro").getData();	
+			// if(!livro.id){
+			// 	this.criarLivro();
+			// }else{
+			// 	this.editarLivro();
+			// }
+			//var oRouter = this.getOwnerComponent().getRouter();
+			//oRouter.navTo("lista");
 		},
 
 		criarLivro : async function (){
 			const idCampoData = "walkthrough---cadastroDeLivros--DP6";
+
 			let livro = this.getView().getModel("Livro").getData();
 			livro.data = new Date(this.byId(idCampoData)
 				.getValue())
@@ -152,17 +146,19 @@
 		aoClicarEmBotaoVoltar: function(){
 				var oRouter = this.getOwnerComponent().getRouter();
 				oRouter.navTo("lista");
-			},
-		
-		validar : function(){
-			let livro = this.getView().getModel("Livro").getData();
-
-			if (livro.nome == '' ||livro.autor== ''  ||livro.editora == '' || livro.data == '' ) {
-					MessageBox.alert("Ocorreu um erro de validação. Complete todos os campos primeiro.");
-					livro.focus();
-			}
 		},
 
+		aoMudarData: function(evento) {
+			var validacao = new ValidarCampos();
+			var dataRecebida = evento.getSource();
+			validacao.validarData(dataRecebida);
+		},
+
+		aoMudarEntrada: function(evento) {
+			var validacao = new ValidarCampos();
+			var entrada = evento.getSource();
+			validacao.validarEntrada(entrada);
+		}
 
 	});
 });
