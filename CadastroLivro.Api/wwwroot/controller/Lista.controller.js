@@ -1,64 +1,39 @@
 sap.ui.define([
-    'sap/ui/core/mvc/Controller',
-    'sap/ui/model/json/JSONModel',
+    "sap/ui/demo/walkthrough/controller/Repositorio",
+    "sap/ui/core/mvc/Controller",
+    "sap/ui/model/json/JSONModel",
     "sap/ui/model/Filter",
     "sap/ui/model/FilterOperator" 
-], function(Controller, JSONModel, Filter, FilterOperator) {
+], function(Repositorio,Controller, JSONModel, Filter, FilterOperator) {
 "use strict";
 
 return Controller.extend("sap.ui.demo.walkthrough.controller.App", {
+            onInit :  function () {
+                this.exibirLivros();
+            },
 
-        onInit :  function () {
-        this.exibirLivros();
-           
-    },
-    exibirLivros : function(){
-        let listaRetornada = this.buscarLivros();
-        listaRetornada.then(lista =>{
-            let modelo = new JSONModel(lista)
-            this.getView().setModel(modelo, "listaDosLivros")
-        })
-    },
+            exibirLivros : function(){
 
-    buscarLivros : async function(){
-        
-        let livrosRetornados;
-        await fetch("https://localhost:7187/api/livro")
-        .then(response => response.json())
-        .then(data => livrosRetornados = data)
+                var repositorio = new Repositorio()
+                var livrosSalvos = repositorio.BuscarTodos()
+                    livrosSalvos.then(lista =>{
+                        let modelo = new JSONModel(lista)
+                            this.getView().setModel(modelo, "listaDosLivros")
+                    })
+            },
 
-        return livrosRetornados 
-    },
+            aoPressionarLivro: function (oEvent) {
+                var oItem = oEvent.getSource();
+                var oRouter = this.getOwnerComponent().getRouter();
+                oRouter.navTo("detalhes", {
+                    id: window.encodeURIComponent(oItem.getBindingContext("listaDosLivros").getProperty('id'))
+                });
+            },
 
-    aoFiltrarLivros: function (oEvent ) {
-       // build filter array
-            
-			var aFilter = [];
-			var sQuery = oEvent.getParameter("query");
-			if (sQuery) {
-				aFilter.push(new Filter("titulo", FilterOperator.Contains, sQuery));
-			}
-
-			// filter binding
-			var oList = "listaDosLivros";
-			var oBinding = oList.getBinding("items");
-			oBinding.filter(aFilter);
-		
-    },
-
-    
-    aoPressionarLivro: function (oEvent) {
-        var oItem = oEvent.getSource();
-        var oRouter = this.getOwnerComponent().getRouter();
-        oRouter.navTo("detalhes", {
-            id: window.encodeURIComponent(oItem.getBindingContext("listaDosLivros").getProperty('id'))
-        });
-    },
-
-    aoClicarEmCadastrar: function(){
-        var oRouter = this.getOwnerComponent().getRouter();
-		    oRouter.navTo("cadastroDeLivros")
-    }
+            aoClicarEmCadastrar: function(){
+                var oRouter = this.getOwnerComponent().getRouter();
+                    oRouter.navTo("cadastroDeLivros")
+            }
 
     });
 });

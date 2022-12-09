@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "sM+RYifjMt7x/vI1dkvvHyWnq6IVqOmqax7iX0PThIM=",
+  "Hash": "2NEl6qnABg/fYWNsNaRn0kl85LIaLRRMbLpA8Imy/p8=",
   "Source": "CadastroLivro.Api",
   "BasePath": "_content/CadastroLivro.Api",
   "Mode": "Default",
@@ -102,12 +102,12 @@
       "OriginalItemSpec": "wwwroot\\controller\\Lista.controller.js"
     },
     {
-      "Identity": "C:\\Users\\Usuario\\Desktop\\CRUD\\CadastroLivro.Api\\wwwroot\\controller\\Validacao.js",
+      "Identity": "C:\\Users\\Usuario\\Desktop\\CRUD\\CadastroLivro.Api\\wwwroot\\controller\\Repositorio.js",
       "SourceId": "CadastroLivro.Api",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\Usuario\\Desktop\\CRUD\\CadastroLivro.Api\\wwwroot\\",
       "BasePath": "_content/CadastroLivro.Api",
-      "RelativePath": "controller/Validacao.js",
+      "RelativePath": "controller/Repositorio.js",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -116,7 +116,24 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\controller\\Validacao.js"
+      "OriginalItemSpec": "wwwroot\\controller\\Repositorio.js"
+    },
+    {
+      "Identity": "C:\\Users\\Usuario\\Desktop\\CRUD\\CadastroLivro.Api\\wwwroot\\controller\\ValidarCampos.js",
+      "SourceId": "CadastroLivro.Api",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Usuario\\Desktop\\CRUD\\CadastroLivro.Api\\wwwroot\\",
+      "BasePath": "_content/CadastroLivro.Api",
+      "RelativePath": "controller/ValidarCampos.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\controller\\ValidarCampos.js"
     },
     {
       "Identity": "C:\\Users\\Usuario\\Desktop\\CRUD\\CadastroLivro.Api\\wwwroot\\css\\style.css",

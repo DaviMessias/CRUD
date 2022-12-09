@@ -21,9 +21,6 @@
 			oMM.registerObject(oView.byId("input-nome"), true);
 			oMM.registerObject(oView.byId("input-autor"), true);
 			oMM.registerObject(oView.byId("input-editora"), true);
-
-			
-			
 		},
 
 		_aoCoincidirObjeto : function (oEvent) {
@@ -64,7 +61,7 @@
 
 			var dataRecebida = this.getView().byId("DP6");
 
-			// Check that inputs are not empty.
+			// Verifica se as entradas não estão vazias.
 			// Validation does not happen during data binding as this is only triggered by user actions.
 			aInputs.forEach(function (oInput) {
 				falhaValidacao = validacao.validarEntrada(oInput) || falhaValidacao;
@@ -82,15 +79,8 @@
 			} else {
 				MessageBox.alert("Ocorreu um erro de validação. Complete todos os campos primeiro.");
 			}
-
-			//let livro = this.getView().getModel("Livro").getData();	
-			// if(!livro.id){
-			// 	this.criarLivro();
-			// }else{
-			// 	this.editarLivro();
-			// }
-			//var oRouter = this.getOwnerComponent().getRouter();
-			//oRouter.navTo("lista");
+			var oRouter = this.getOwnerComponent().getRouter();
+			await oRouter.navTo("lista");
 		},
 
 		criarLivro : async function (){
@@ -162,7 +152,3 @@
 
 	});
 });
-
-
-
-

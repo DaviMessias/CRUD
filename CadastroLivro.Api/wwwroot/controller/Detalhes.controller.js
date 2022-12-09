@@ -1,8 +1,11 @@
 sap.ui.define([
+	"sap/ui/demo/walkthrough/controller/Repositorio",
 	"sap/ui/core/mvc/Controller",
 	"sap/ui/model/json/JSONModel",
+	"sap/m/MessageBox",
 	"sap/m/MessageToast"
-], function (Controller, JSONModel, MessageToast) {
+
+], function (Repositorio,Controller, JSONModel, MessageBox, MessageToast) {
 	"use strict";
 
 	return Controller.extend("sap.ui.demo.walkthrough.controller.Detalhes", {
@@ -20,47 +23,50 @@ sap.ui.define([
 		},
 
 		
-		exibirLivroSelecionado : function(idLivro){
+		exibirLivroSelecionado : function(id){
+			let repositorio = new Repositorio();
+			let livroRetornado = repositorio.BuscarPorId(id);
 
-			this.buscarLivroSelecionado(idLivro)
-				.then(livroDoBanco => {
-				let livro = new JSONModel(livroDoBanco)
+			livroRetornado.then(livroDoBanco => {
+			let livro = new JSONModel(livroDoBanco)
 				this.getView().setModel(livro, "Livro")
-
 			})
 		},
-	
-		buscarLivroSelecionado: async function(idLivro){
-			
-			return await fetch(`https://localhost:7187/api/livro/${idLivro}`)
-			.then(res => res.json())
-		},
+
 		aoClicarEmBotaoVoltar: function () {
-			
-				var oRouter = this.getOwnerComponent().getRouter();
+			var oRouter = this.getOwnerComponent().getRouter();
 				oRouter.navTo("lista");
 		},
 
 		aoPressionarEditar : function(){
-				var idLivroASerEditado = this.getView().getModel("Livro").getData().id
-				var oRouter = this.getOwnerComponent().getRouter();
+			var idLivroASerEditado = this.getView().getModel("Livro").getData().id
+			var oRouter = this.getOwnerComponent().getRouter();
 				oRouter.navTo("editar", {
-					id: idLivroASerEditado
+						id: idLivroASerEditado
 				});
-				
 		},
 
-		aoPressionarExcluir : async function(){
-				//var oRouter = this.getOwnerComponent().getRouter();
+		aoPressionarExcluir :  function(){
+			
+			let livroASerDeletadoTeste = this.getView().getModel("Livro").getData();
+			let idLivroASerDeletadoTeste = livroASerDeletadoTeste.id
 
-				let LivroASerDeletado = this.getView().getModel("Livro").getData();
-				let idLivroASerDeletado = LivroASerDeletado.id
+			MessageBox.warning(
+				"Confirmar exclusão do livro?",
+				{
+					title : "Excluir livro?",
+					actions : [MessageBox.Action.CANCEL, MessageBox.Action.OK],
+					phasizedAction: MessageBox.Action.OK,
+					initialFocus: MessageBox.Action.CANCEL,
+					onClose: async function (oAction) { 
+						if (oAction == "OK"){
 
-				 fetch(`https://localhost:7187/api/livro/${idLivroASerDeletado}`, {
-					method: 'DELETE'
-					})
-
-				MessageToast.show("Livro deletado");
+							let repositorio = new Repositorio();
+							repositorio.DeletarLivro(idLivroASerDeletadoTeste);
+							MessageToast.show("Livro deletado");
+							}
+					}
+				});
 		}
 	});
 });
