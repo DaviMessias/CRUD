@@ -9,13 +9,18 @@ sap.ui.define([
 
 return Controller.extend("sap.ui.demo.walkthrough.controller.App", {
             onInit :  function () {
+                var rotaDaView = sap.ui.core.UIComponent.getRouterFor(this);
+			    rotaDaView.attachRoutePatternMatched(this.aoCoincidirRota, this);
+            },
+
+            aoCoincidirRota: function() {
                 this.exibirLivros();
             },
 
             exibirLivros : function(){
 
-                var repositorio = new Repositorio()
-                var livrosSalvos = repositorio.BuscarTodos()
+                var _repositorio = new Repositorio()
+                var livrosSalvos = _repositorio.BuscarTodos()
                     livrosSalvos.then(lista =>{
                         let modelo = new JSONModel(lista)
                             this.getView().setModel(modelo, "listaDosLivros")
@@ -33,7 +38,21 @@ return Controller.extend("sap.ui.demo.walkthrough.controller.App", {
             aoClicarEmCadastrar: function(){
                 var oRouter = this.getOwnerComponent().getRouter();
                     oRouter.navTo("cadastroDeLivros")
-            }
+            },
+
+            aoFiltrarLivros: function (evento) {
+                const lista = "Lista";
+                const tituloDoLivro = "nome";
+                let listaLivros = [];
+                let parametroPesquisa = evento.getParameter("query");
+                
+                listaLivros.push(new Filter(tituloDoLivro, FilterOperator.Contains, parametroPesquisa));
+                    
+                let listaDeLivros = this.byId(lista);
+                let oBinding = listaDeLivros.getBinding("items");
+                oBinding.filter(listaLivros);
+                
+            },
 
     });
 });

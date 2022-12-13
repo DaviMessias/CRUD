@@ -1,5 +1,6 @@
 sap.ui.define([
-	"sap/ui/base/ManagedObject"
+	"sap/ui/base/ManagedObject",
+
 ], function(ManagedObject) { 
 	"use strict";
 
@@ -21,7 +22,6 @@ sap.ui.define([
 
         validarEntrada: function (oInput) {
 
-            //setando status
 			var valorStatus = "None";
 			var falhaValidacao = false;
 			var oBinding = oInput.getBinding("value");
@@ -34,9 +34,8 @@ sap.ui.define([
 			} catch (Exception) {
 				valorStatus = "Error";
 				falhaValidacao = true;
-				//oInput.setValueStateText("Campo Inválido");
 			}
-
+			
 			oInput.setValueState(valorStatus);
 			return falhaValidacao;
             

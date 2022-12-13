@@ -6,28 +6,45 @@ sap.ui.define([
     return ManagedObject.extend("sap.ui.demo.walkthrough.controller.Repositorio", {
 
         BuscarTodos : async function (){
-            let livrosRetornados;
-            await fetch("https://localhost:7187/api/livro")
-            .then(res => res.json())
-            .then(data => livrosRetornados = data)
-        return livrosRetornados
-
+            return await fetch("https://localhost:7187/api/livro")
+            .then(res => res.json());
         },
         
-        BuscarPorId : function(id){
-            let livro = fetch (`https://localhost:7187/api/livro/${id}`)
-            .then(res => res.json())
-            .then(data=> livro = data )
-            return livro;
+        BuscarPorId : async function(id){
+            return await fetch (`https://localhost:7187/api/livro/${id}`)
+            .then(res => res.json());
+        },
+
+        CriarNovoLivro : async function (livroASerCriado){
+            let livroCriado;
+			await fetch(' https://localhost:7187/api/livro', {
+				method: 'POST',
+				headers: {
+					'content-type': 'application/json'
+				},
+				body: JSON.stringify(livroASerCriado)
+			})
+			.then((resposta) => resposta.json())
+            .then(data => livroCriado = data)
+            return livroASerCriado;
+		},
+
+        EditarLivro : async function(livroASerEditado) {
+			await fetch(`https://localhost:7187/api/livro/${livroASerEditado.id}`, {
+				method: 'PUT',
+				headers: {
+                    'Accept': 'application/json',
+					'content-type': 'application/json'
+				},
+				body: JSON.stringify(livroASerEditado)
+			    })
+			.then((resposta) => resposta.json())
         },
 
         DeletarLivro : async function(idLivroASerDeletado) {
-				await fetch(`https://localhost:7187/api/livro/${idLivroASerDeletado}`, {
-					method: 'DELETE'
-				})
-                let oRouter = this.getOwnerComponent().getRouter();
-                oRouter.navTo("overview");
+            await fetch(`https://localhost:7187/api/livro/${idLivroASerDeletado}`, {
+                method: 'DELETE'
+            });
         }
-       
     })
 })
