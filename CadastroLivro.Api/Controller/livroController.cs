@@ -52,12 +52,12 @@ namespace CadastroLivro.Api.Controller
         }
 
         [HttpPost]
-        public ActionResult Cadastrar([FromBody] Livro livros)
+        public ActionResult Cadastrar(Livro livro)
         {
             try
             {
-                _repository.Adicionar(livros);
-                return Created("Objeto livro", livros);
+                _repository.Adicionar(livro);
+                return Created("Objeto livro", livro);
             }
             catch(Exception ex)
             {
@@ -66,7 +66,7 @@ namespace CadastroLivro.Api.Controller
         }
 
         [HttpPut("{id}")]
-        public ActionResult Editar(int id, Livro LivroASerEditado)
+        public ActionResult Editar( Livro LivroASerEditado)
         {
             try
             {

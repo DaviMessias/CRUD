@@ -5,11 +5,12 @@ sap.ui.define([
 	"use strict";
 
 	return ManagedObject.extend("sap.ui.demo.walkthrough.controller.Servicos", {
-		
-		mudarRota :  function(rota, nomeDaRota){
-			
-			return rota.navTo(nomeDaRota);
-		},
+		NavegarParaRota : function(idTeste, endPoint){
+			let rota = this.getOwnerComponent().getRouter();
+			rota.navTo( endPoint , {
+				id: idTeste
+			});
+		}
 	});
 });
 	

@@ -12,14 +12,15 @@ sap.ui.define([
 	return Controller.extend("sap.ui.demo.walkthrough.controller.Detalhes", {
 
 		onInit: function () {
-			this.getOwnerComponent();
-			var oRouter = this.getOwnerComponent().getRouter();
-			oRouter.getRoute("detalhes").attachPatternMatched(this._aoCoincidirObjeto , this);
+			let rota = this.getOwnerComponent().getRouter().getRoute('detalhes');
+			if(!!rota){
+				rota.attachPatternMatched(this._aoCoincidirObjeto, this)
+			}
 		},
 
 		_aoCoincidirObjeto : function (oEvent) {
-			var salvarId = window.decodeURIComponent(oEvent.getParameter("arguments").id);
-				this.exibirLivroSelecionado(salvarId);
+			let idDoLivro = window.decodeURIComponent(oEvent.getParameter("arguments").id);
+				this.exibirLivroSelecionado(idDoLivro);
 		},
 
 		exibirLivroSelecionado : function(id){
@@ -33,21 +34,19 @@ sap.ui.define([
 		},
 
 		aoClicarEmBotaoVoltar: function () {
-			var _servicos = new Servicos()
-			var rota = this.getOwnerComponent().getRouter();
-			_servicos.mudarRota(rota,"lista")
-			
+			const nomeDaRota = "lista";
+			const idVazio = "";
+			this.NavegarPara(idVazio,nomeDaRota)
 		},
 
 		aoPressionarEditar : function(){
-			var idLivroASerEditado = this.getView().getModel("Livro").getData().id
-			var oRouter = this.getOwnerComponent().getRouter();
-				oRouter.navTo("editar", {
-						id: idLivroASerEditado
-				});
+			var idLivroASerEditado = this.getView().getModel("Livro").getData().id;
+			const nomeDaRota = "editar";
+
+			this.NavegarPara(idLivroASerEditado, nomeDaRota)
 		},
 
-		aoPressionarExcluir : function(){
+		aoPressionarExcluir: function(){
 			let livroASerDeletado = this.getView().getModel("Livro").getData();
 			const nomeDaRota = "lista";
 			MessageBox.warning(
@@ -57,21 +56,20 @@ sap.ui.define([
 					actions : [MessageBox.Action.CANCEL, MessageBox.Action.OK],
 					phasizedAction: MessageBox.Action.OK,
 					initialFocus: MessageBox.Action.CANCEL,
-					onClose:(oAction) => { 
+					onClose: (oAction) => { 
 						if (oAction == "OK"){
 
 							let repositorio = new Repositorio();
 							 repositorio.DeletarLivro(livroASerDeletado.id);
-							MessageToast.show("Livro deletado");
-							this.mudarRota(nomeDaRota)
+							this.NavegarPara(livroASerDeletado.id, nomeDaRota)
 							} 
 					}
 				});
 		},
 
-		mudarRota :  function(nomeRota){
-			let oRouter = this.getOwnerComponent().getRouter();
-			oRouter.navTo(nomeRota);
+		NavegarPara : function(idNavegacao, endPoint){
+			let _servico = new Servicos();
+			_servico.NavegarParaRota.bind(this)(idNavegacao,endPoint);
 		},
 	});
 });
