@@ -8,8 +8,8 @@ sap.ui.define([
 
 		validarData : function(dataRecebida){
 		
-			var valorStatus = "None";
-			var falhaValidacao = false;
+			let valorStatus = "None";
+			let falhaValidacao = false;
 			if (!dataRecebida.isValidValue() || dataRecebida.getValue() == ""){
 				valorStatus = "Error";
 				falhaValidacao = true;
@@ -22,9 +22,9 @@ sap.ui.define([
 
         validarEntrada: function (oInput) {
 
-			var valorStatus = "None";
-			var falhaValidacao = false;
-			var oBinding = oInput.getBinding("value");
+			let valorStatus = "None";
+			let falhaValidacao = false;
+			let oBinding = oInput.getBinding("value");
             
 			try {
 				oBinding.getType().validateValue(oInput.getValue());

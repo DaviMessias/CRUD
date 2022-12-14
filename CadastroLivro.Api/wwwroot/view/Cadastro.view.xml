@@ -43,7 +43,7 @@
 										type : 'sap.ui.model.type.String',
 										constraints : {
 										minLength: 1,
-										maxLength: 20
+										maxLength: 50
 											}
 									}" />
 
@@ -57,7 +57,7 @@
 										type : 'sap.ui.model.type.String',
 										constraints : {
 										minLength: 1,
-										maxLength: 20
+										maxLength: 25
 											}
 									}" />
 									

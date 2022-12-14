@@ -6,7 +6,7 @@ sap.ui.define([
     return ManagedObject.extend("sap.ui.demo.walkthrough.controller.Repositorio", {
 
         BuscarTodos : async function (){
-            return await fetch("https://localhost:7187/api/livro")
+            return await fetch('https://localhost:7187/api/livro/')
             .then(res => res.json());
         },
         
@@ -15,9 +15,8 @@ sap.ui.define([
             .then(res => res.json());
         },
 
-        CriarNovoLivro : async function (livroASerCriado){
-            let livroCriado;
-			await fetch(' https://localhost:7187/api/livro', {
+        CriarNovoLivro: async function (livroASerCriado){
+            return await fetch(' https://localhost:7187/api/livro', {
 				method: 'POST',
 				headers: {
 					'content-type': 'application/json'
@@ -25,8 +24,7 @@ sap.ui.define([
 				body: JSON.stringify(livroASerCriado)
 			})
 			.then((resposta) => resposta.json())
-            .then(data => livroCriado = data)
-            return livroASerCriado;
+            .then(data => data);
 		},
 
         EditarLivro : async function(livroASerEditado) {

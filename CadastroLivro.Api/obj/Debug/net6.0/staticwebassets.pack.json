@@ -25,6 +25,10 @@
       "PackagePath": "staticwebassets\\controller\\Repositorio.js"
     },
     {
+      "Id": "C:\\Users\\Usuario\\Desktop\\CRUD\\CadastroLivro.Api\\wwwroot\\controller\\Servicos.js",
+      "PackagePath": "staticwebassets\\controller\\Servicos.js"
+    },
+    {
       "Id": "C:\\Users\\Usuario\\Desktop\\CRUD\\CadastroLivro.Api\\wwwroot\\controller\\ValidarCampos.js",
       "PackagePath": "staticwebassets\\controller\\ValidarCampos.js"
     },

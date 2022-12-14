@@ -17,7 +17,8 @@ namespace Infra
             using var db = SqlServerTools.CreateDataConnection(ConexaoLinq());
             try
             {
-                db.Insert(livro);
+                var id = db.InsertWithInt32Identity(livro);
+                livro.Id = id;
             }
             catch (Exception ex)
             {

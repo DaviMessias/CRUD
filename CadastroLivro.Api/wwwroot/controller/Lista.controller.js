@@ -10,10 +10,10 @@ sap.ui.define([
 return Controller.extend("sap.ui.demo.walkthrough.controller.App", {
             onInit :  function () {
                 var rotaDaView = sap.ui.core.UIComponent.getRouterFor(this);
-			    rotaDaView.attachRoutePatternMatched(this.aoCoincidirRota, this);
+			    rotaDaView.attachRoutePatternMatched(this._aoCoincidirObjeto, this);
             },
 
-            aoCoincidirRota: function() {
+            _aoCoincidirObjeto: function() {
                 this.exibirLivros();
             },
 
