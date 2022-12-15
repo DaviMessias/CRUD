@@ -17,10 +17,9 @@
 				}">
 				<headerToolbar>
 							<Toolbar>
-									<Title/>
-									<Button type="Emphasized" id="botaoCadastrar" text="{i18n>botaoCadastrar}" press=".aoClicarEmCadastrar" />
+									<Button type="Neutral" id="botaoCadastrar"  icon="sap-icon://add-coursebook" text="{i18n>botaoCadastrar.Cadastrar}" press=".aoClicarEmCadastrar" />
 									<ToolbarSpacer/>
-									<SearchField width="45%" search=".aoFiltrarLivros"/>
+									<SearchField width="50%" search=".aoFiltrarLivros"/>
 							</Toolbar>
 				</headerToolbar>
 				<columns>

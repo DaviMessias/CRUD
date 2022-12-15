@@ -4,28 +4,25 @@ sap.ui.define([
 	"sap/ui/core/mvc/Controller",
 	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageBox",
-	"sap/m/MessageToast"
 
-], function (Servicos,Repositorio,Controller, JSONModel, MessageBox, MessageToast) {
+], function (Servicos,Repositorio,Controller, JSONModel, MessageBox) {
 	"use strict";
 
 	return Controller.extend("sap.ui.demo.walkthrough.controller.Detalhes", {
 
 		onInit: function () {
-			let rota = this.getOwnerComponent().getRouter().getRoute('detalhes');
-			if(!!rota){
-				rota.attachPatternMatched(this._aoCoincidirObjeto, this)
-			}
+			let oRouter = this.getOwnerComponent().getRouter();
+			oRouter.getRoute("detalhes").attachPatternMatched(this._aoCoincidirObjeto, this);
 		},
 
 		_aoCoincidirObjeto : function (oEvent) {
 			let idDoLivro = window.decodeURIComponent(oEvent.getParameter("arguments").id);
-				this.exibirLivroSelecionado(idDoLivro);
+				this.carregarLivroSelecionado(idDoLivro);
 		},
 
-		exibirLivroSelecionado : function(id){
-			let repositorio = new Repositorio();
-			let livroRetornado = repositorio.BuscarPorId(id);
+		carregarLivroSelecionado : function(id){
+			let _repositorio = new Repositorio();
+			let livroRetornado = _repositorio.BuscarPorId(id);
 
 			livroRetornado.then(livroDoBanco => {
 			let livro = new JSONModel(livroDoBanco)
@@ -35,22 +32,21 @@ sap.ui.define([
 
 		aoClicarEmBotaoVoltar: function () {
 			const nomeDaRota = "lista";
-			const idVazio = "";
-			this.NavegarPara(idVazio,nomeDaRota)
+			this.NavegarPara(nomeDaRota,null)
 		},
 
 		aoPressionarEditar : function(){
-			var idLivroASerEditado = this.getView().getModel("Livro").getData().id;
+			let idLivroASerEditado = this.getView().getModel("Livro").getData().id;
 			const nomeDaRota = "editar";
 
-			this.NavegarPara(idLivroASerEditado, nomeDaRota)
+			this.NavegarPara(nomeDaRota,idLivroASerEditado)
 		},
 
 		aoPressionarExcluir: function(){
 			let livroASerDeletado = this.getView().getModel("Livro").getData();
 			const nomeDaRota = "lista";
 			MessageBox.warning(
-				"Confirmar exclusão do livro?",
+				"Confirmar exclusão do livro",
 				{
 					title : "Excluir livro?",
 					actions : [MessageBox.Action.CANCEL, MessageBox.Action.OK],
@@ -59,17 +55,17 @@ sap.ui.define([
 					onClose: (oAction) => { 
 						if (oAction == "OK"){
 
-							let repositorio = new Repositorio();
-							 repositorio.DeletarLivro(livroASerDeletado.id);
-							this.NavegarPara(livroASerDeletado.id, nomeDaRota)
+							let _repositorio = new Repositorio();
+							 _repositorio.DeletarLivro(livroASerDeletado.id);
+							this.NavegarPara(nomeDaRota, livroASerDeletado.id)
 							} 
 					}
 				});
 		},
 
-		NavegarPara : function(idNavegacao, endPoint){
+		NavegarPara : function(endPoint, idNavegacao){
 			let _servico = new Servicos();
-			_servico.NavegarParaRota.bind(this)(idNavegacao,endPoint);
+			_servico.NavegarParaRota.bind(this)(endPoint,idNavegacao);
 		},
 	});
 });
