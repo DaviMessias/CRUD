@@ -9,7 +9,7 @@
 		showNavButton= "true"
 		navButtonPress= ".aoClicarEmVoltar">
 		<headerContent>
-			<Button text="Salvar" press=".aoPressionarSalvar" />
+			<Button type="Emphasized" text="Salvar" icon="sap-icon://save"  press=".aoPressionarSalvar" />
 		</headerContent>
 
 					<l:VerticalLayout class="sapUiContentPadding" width="30%">

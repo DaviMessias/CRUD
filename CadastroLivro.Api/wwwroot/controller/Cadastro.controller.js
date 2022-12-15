@@ -23,9 +23,9 @@
 			oMM.registerObject(tela.byId("input-editora"), true);
 		},
 
-		_aoCoincidirObjeto : function (oEvent) {
-			if (oEvent.getParameter("name") == "editar") {
-				let idDoLivro = window.decodeURIComponent(oEvent.getParameter("arguments").id);
+		_aoCoincidirObjeto : function (evento) {
+			if (evento.getParameter("name") == "editar") {
+				let idDoLivro = window.decodeURIComponent(evento.getParameter("arguments").id);
 				this.carregarLivro(idDoLivro);
 				this.limparCampos();
 			} else {
@@ -49,15 +49,15 @@
 			let _validacao = new ValidarCampos();
 
 			let tela = this.getView(),
-				arrayDeInputs = [
+				arrayDeEntradas = [
 				tela.byId("input-nome"),
 				tela.byId("input-autor"),
 				tela.byId("input-editora"),
 			],
 				falha_Validacao = false;
 
-			arrayDeInputs.forEach( function (input) {
-				falha_Validacao =  _validacao.validarEntrada(input) || falha_Validacao;
+			arrayDeEntradas.forEach( function (entrada) {
+				falha_Validacao =  _validacao.validarEntrada(entrada) || falha_Validacao;
 			}, this);
 
 			falha_Validacao =  _validacao.validarData(dataRecebida) || falha_Validacao;
@@ -66,12 +66,11 @@
 					if(!livro.id){
 						this.criarLivro(livro)
 							.then(livroCriado => 
-							this.navegarPara(livroCriado.id, nomeDaRota));
+							this.navegarPara(nomeDaRota,livroCriado.id));
 
 					}else{
 							this.editarLivro(livro)
-							this.navegarPara(livro.id, nomeDaRota)
-
+								this.navegarPara(nomeDaRota,livro.id);
 					}
 			} else {
 				 MessageBox.alert("Ocorreu um erro de validação. Complete todos os campos primeiro.");
@@ -84,17 +83,8 @@
 		},
 
 		editarLivro : function(livroASerEditado) {
-			//let livroASerEditado = this.getView().getModel("Livro").getData();
 			let _repositorio = new Repositorio();
 			_repositorio.EditarLivro(livroASerEditado)
-		},
-
-		carregarLivro : function(id){
-			let _repositorio = new Repositorio();
-			_repositorio.BuscarPorId(id)
-				.then(livroDoBanco => {
-				this.getView().setModel(new JSONModel(livroDoBanco), "Livro")
-			})
 		},
 
 		aoMudarData: function(evento) {
@@ -109,40 +99,47 @@
 			_validacao.validarEntrada(entrada);
 		},
 
+		carregarLivro : function(id){
+			let _repositorio = new Repositorio();
+			_repositorio.BuscarPorId(id)
+				.then(livroDoBanco => {
+				this.getView().setModel(new JSONModel(livroDoBanco), "Livro")
+			})
+		},
+
+		limparCampos : function(){
+			const estadoDoCampo = "None"
+			let tela = this.getView(),
+			arrayDeEntradas = [
+			tela.byId("input-nome"),
+			tela.byId("input-autor"),
+			tela.byId("input-editora"),
+			tela.byId("DP6"),
+			]
+				arrayDeEntradas.forEach(element => element.setValueState(estadoDoCampo));
+		},
+
 		aoClicarEmVoltar: function(){
 			const nomeDaRota = "lista";
-			const idVazio = "";
 
 			MessageBox.warning(
 				"As edições feitas neste livro não serão salvas.",
 				{
-					title : "Sair da página?",
-					actions : [MessageBox.Action.CANCEL, MessageBox.Action.OK],
-					phasizedAction: MessageBox.Action.OK,
-					initialFocus: MessageBox.Action.CANCEL,
-					onClose: (oAction) => { 
-						if (oAction === "OK"){
-							this.navegarPara(idVazio, nomeDaRota)
-						}
+				title : "Sair da página?",
+				actions : [MessageBox.Action.CANCEL, MessageBox.Action.OK],
+				phasizedAction: MessageBox.Action.OK,
+				initialFocus: MessageBox.Action.CANCEL,
+				onClose: (oAction) => { 
+					if (oAction === "OK"){
+						this.navegarPara(nomeDaRota,null)
 					}
+				}
 				});
 		},
 
-		limparCampos : function(){
-				const estadoDoCampo = "None"
-				let tela = this.getView(),
-				arrayDeInputs = [
-				tela.byId("input-nome"),
-				tela.byId("input-autor"),
-				tela.byId("input-editora"),
-				tela.byId("DP6"),
-			]
-			arrayDeInputs.forEach(element => element.setValueState(estadoDoCampo));
-		},
-
-		navegarPara: function(idNavegacao, endPoint){			
+		navegarPara: function(endPoint,idNavegacao){			
 			let _servico = new Servicos();
-			_servico.NavegarParaRota.bind(this)(idNavegacao,endPoint);
-		},
+			_servico.NavegarParaRota.bind(this)(endPoint,idNavegacao);
+		}
 	});
 });

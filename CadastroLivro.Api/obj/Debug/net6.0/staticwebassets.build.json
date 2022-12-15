@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "DqWXB6A869btZJdruVfRBlac2ikTf1KaGxBd969Rsgg=",
+  "Hash": "zc/gj2qIG9ZnMMJf7uNAgQioIQ5Pg28PtdgPx9JCrJk=",
   "Source": "CadastroLivro.Api",
   "BasePath": "_content/CadastroLivro.Api",
   "Mode": "Default",
@@ -119,12 +119,12 @@
       "OriginalItemSpec": "wwwroot\\controller\\Repositorio.js"
     },
     {
-      "Identity": "C:\\Users\\Usuario\\Desktop\\CRUD\\CadastroLivro.Api\\wwwroot\\controller\\Servicos.js",
+      "Identity": "C:\\Users\\Usuario\\Desktop\\CRUD\\CadastroLivro.Api\\wwwroot\\controller\\Servico.js",
       "SourceId": "CadastroLivro.Api",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\Usuario\\Desktop\\CRUD\\CadastroLivro.Api\\wwwroot\\",
       "BasePath": "_content/CadastroLivro.Api",
-      "RelativePath": "controller/Servicos.js",
+      "RelativePath": "controller/Servico.js",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -133,7 +133,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\controller\\Servicos.js"
+      "OriginalItemSpec": "wwwroot\\controller\\Servico.js"
     },
     {
       "Identity": "C:\\Users\\Usuario\\Desktop\\CRUD\\CadastroLivro.Api\\wwwroot\\controller\\ValidarCampos.js",
@@ -151,23 +151,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\controller\\ValidarCampos.js"
-    },
-    {
-      "Identity": "C:\\Users\\Usuario\\Desktop\\CRUD\\CadastroLivro.Api\\wwwroot\\css\\style.css",
-      "SourceId": "CadastroLivro.Api",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Usuario\\Desktop\\CRUD\\CadastroLivro.Api\\wwwroot\\",
-      "BasePath": "_content/CadastroLivro.Api",
-      "RelativePath": "css/style.css",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\style.css"
     },
     {
       "Identity": "C:\\Users\\Usuario\\Desktop\\CRUD\\CadastroLivro.Api\\wwwroot\\i18n\\i18n.properties",

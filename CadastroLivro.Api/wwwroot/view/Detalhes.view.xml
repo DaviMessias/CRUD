@@ -11,17 +11,17 @@
 		showNavButton= "true"
 		navButtonPress= ".aoClicarEmBotaoVoltar">
 				<headerContent>
-					<Button type="Reject" id="excluir" text="Excluir" visible="true" press="aoPressionarExcluir"/>
-					<Button type="Emphasized" id="editar" text="Editar" enabled="true" press="aoPressionarEditar"/>
+					<Button type="Reject" id="excluir" icon="sap-icon://delete" text="{i18n>botaoExcluir.Excluir}" visible="true" press="aoPressionarExcluir"/>
+					<Button type="Emphasized" id="editar" icon="sap-icon://edit" text="{i18n>botaoEditar.Editar}" enabled="true" press="aoPressionarEditar"/>
 				</headerContent>
-		<l:VerticalLayout class="sapUiContentPadding" width="50%">	
+		<l:VerticalLayout class="sapUiContentPadding" width="100%">	
 				<List
 					headerText="{Livro>/nome}" >
 					<DisplayListItem
-						label="ID"
+						label="{i18n>id}"
 						value="{Livro>/id}" />
 					<DisplayListItem
-						label="Autor"
+						label="{i18n>nome}"
 						value="{Livro>/autor}" />
 					<DisplayListItem
 						label="Editora"
