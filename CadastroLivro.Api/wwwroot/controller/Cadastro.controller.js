@@ -4,93 +4,111 @@
 		"sap/ui/demo/walkthrough/controller/ValidarCampos",
         "sap/ui/core/mvc/Controller",
 		"sap/ui/model/json/JSONModel",
-		"sap/ui/core/Core",
 		"sap/m/MessageBox",
 	
 
-    ], function(Servicos,Repositorio,ValidarCampos,Controller, JSONModel,Core, MessageBox ) {
+    ], function(Servicos,Repositorio,ValidarCampos,Controller, JSONModel, MessageBox ) {
     "use strict";
     
     return Controller.extend("sap.ui.demo.walkthrough.controller.Cadastro", {
         onInit: function () {
 			let rotaDaView = sap.ui.core.UIComponent.getRouterFor(this);
 			rotaDaView.attachRoutePatternMatched(this._aoCoincidirObjeto, this);
-
-			let tela = this.getView(),
-			oMM = Core.getMessageManager();
-			oMM.registerObject(tela.byId("input-nome"), true);
-			oMM.registerObject(tela.byId("input-autor"), true);
-			oMM.registerObject(tela.byId("input-editora"), true);
 		},
 
 		_aoCoincidirObjeto : function (evento) {
-			if (evento.getParameter("name") == "editar") {
-				let idDoLivro = window.decodeURIComponent(evento.getParameter("arguments").id);
-				this.carregarLivro(idDoLivro);
-				this.limparCampos();
-			} else {
-				let modeloLivro = new JSONModel({
-					nome: "",
-					autor: "",
-					editora: "",
-					data: "",
-				});
-				this.getView().setModel(modeloLivro, "Livro");
-				this.limparCampos();
-				this.byId("DP6").setMinDate(new Date(1800, 0, 1));
-			 	this.byId("DP6").setMaxDate(new Date);
-			}
+			const nomeDaRota = "editar";
+			let _servicos = new Servicos();
+			_servicos.definirDataValida.bind(this)()
+
+			this.limparCampos();
+
+			let id;
+			let rotaPraEditar = evento.getParameter("name") == nomeDaRota;
+			
+			rotaPraEditar
+				? (id = window.decodeURIComponent(evento.getParameter("arguments").id),
+				  this.carregarLivro(id))
+				: this._criarModeloDoLivro();
 		},
 		
 		aoPressionarSalvar: function () {
-			const nomeDaRota = "detalhes"
-			let livro = this.getView().getModel("Livro").getData();	
-			let dataRecebida = this.getView().byId("DP6");
+			const nomeModelo = "Livro";
+			const idDataPicker = "DP6";
+			const idInputs = ["input-nome", "input-autor", "input-editora"];
+			const mensagemDeErroValidacao = "Ocorreu um erro de validação. Complete todos os campos primeiro.";
+
+			let livro = this.getView().getModel(nomeModelo).getData();
+			let dataInputada = this.getView().byId(idDataPicker);
 			let _validacao = new ValidarCampos();
 
 			let tela = this.getView(),
-				arrayDeEntradas = [
-				tela.byId("input-nome"),
-				tela.byId("input-autor"),
-				tela.byId("input-editora"),
-			],
-				falha_Validacao = false;
+				arrayDeEntradas = [ 
+				tela.byId(idInputs[0]),
+				tela.byId(idInputs[1]),
+				tela.byId(idInputs[2]),
+			]
+			let falha_Validacao = _validacao.validarCampos(arrayDeEntradas, dataInputada);
 
-			arrayDeEntradas.forEach( function (entrada) {
-				falha_Validacao =  _validacao.validarEntrada(entrada) || falha_Validacao;
-			}, this);
-
-			falha_Validacao =  _validacao.validarData(dataRecebida) || falha_Validacao;
-
-			if (!falha_Validacao) {
-					if(!livro.id){
-						this.criarLivro(livro)
-							.then(livroCriado => 
-							this.navegarPara(nomeDaRota,livroCriado.id));
-
-					}else{
-							this.editarLivro(livro)
-								this.navegarPara(nomeDaRota,livro.id);
-					}
-			} else {
-				 MessageBox.alert("Ocorreu um erro de validação. Complete todos os campos primeiro.");
+			if (falha_Validacao) {
+				MessageBox.alert(mensagemDeErroValidacao)
+				return;
 			}
+			
+			livro.id
+				? this.editarLivro(livro)
+				: this.criarLivro(livro)
 		},
 
-		criarLivro : function (livroASerCriado){
+		criarLivro: function (livroASerCriado){
+			const nomeDaRota = "detalhes";
+
 			let _repositorio = new Repositorio();
 			return _repositorio.CriarNovoLivro(livroASerCriado)
+				.then(livroCriado => 
+					this.navegarPara(nomeDaRota, livroCriado.id));
 		},
 
-		editarLivro : function(livroASerEditado) {
+		editarLivro: function(livroASerEditado) {
+			const nomeDaRota = "detalhes";
 			let _repositorio = new Repositorio();
+			debugger
+
 			_repositorio.EditarLivro(livroASerEditado)
+				this.navegarPara(nomeDaRota, livroASerEditado.id);
 		},
 
+
+		_criarModeloDoLivro: function(){
+			const nomeModelo = "Livro";
+			const stringVazia= "";
+			
+			let modeloLivro = new JSONModel({
+				nome: stringVazia,
+				autor: stringVazia,
+				editora: stringVazia,
+				data: stringVazia,
+			});
+			this.getView().setModel(modeloLivro, nomeModelo);
+		},
+
+		carregarLivro: function(id){
+			const nomeModelo = 'Livro';
+			this.limparCampos();
+			let modeloLivro = new JSONModel();
+
+			let _repositorio = new Repositorio();
+			_repositorio.BuscarPorId(id)
+					.then(livroDoBanco => {
+					this.getView().setModel(modeloLivro = livroDoBanco, nomeModelo)
+			})
+		},
+
+		
 		aoMudarData: function(evento) {
 			let _validacao = new ValidarCampos();
-			let dataRecebida = evento.getSource();
-			_validacao.validarData(dataRecebida);
+			let dataInputada = evento.getSource();
+			_validacao.validarData(dataInputada);
 		},
 
 		aoMudarEntrada: function(evento) {
@@ -99,22 +117,16 @@
 			_validacao.validarEntrada(entrada);
 		},
 
-		carregarLivro : function(id){
-			let _repositorio = new Repositorio();
-			_repositorio.BuscarPorId(id)
-				.then(livroDoBanco => {
-				this.getView().setModel(new JSONModel(livroDoBanco), "Livro")
-			})
-		},
-
 		limparCampos : function(){
 			const estadoDoCampo = "None"
+			const idInputs = ["input-nome","input-autor","input-editora","DP6"]
+
 			let tela = this.getView(),
 			arrayDeEntradas = [
-			tela.byId("input-nome"),
-			tela.byId("input-autor"),
-			tela.byId("input-editora"),
-			tela.byId("DP6"),
+			tela.byId(idInputs[0]),
+			tela.byId(idInputs[1]),
+			tela.byId(idInputs[2]),
+			tela.byId(idInputs[3]),
 			]
 				arrayDeEntradas.forEach(element => element.setValueState(estadoDoCampo));
 		},
@@ -131,15 +143,15 @@
 				initialFocus: MessageBox.Action.CANCEL,
 				onClose: (oAction) => { 
 					if (oAction === "OK"){
-						this.navegarPara(nomeDaRota,null)
+						this.navegarPara(nomeDaRota, null)
 					}
 				}
 				});
 		},
 
-		navegarPara: function(endPoint,idNavegacao){			
+		navegarPara: function(endPoint, idNavegacao){			
 			let _servico = new Servicos();
-			_servico.NavegarParaRota.bind(this)(endPoint,idNavegacao);
-		}
+			_servico.NavegarParaRota.bind(this)(endPoint, idNavegacao);
+		},
 	});
 });

@@ -19,18 +19,22 @@ return Controller.extend("sap.ui.demo.walkthrough.controller.App", {
             },
 
             carregarLivros : function(){
+                const nomeModelo = "listaDosLivros";
                 let _repositorio = new Repositorio()
                 let livrosSalvos = _repositorio.BuscarTodos()
                     livrosSalvos.then(lista =>{
                         let modelo = new JSONModel(lista)
-                            this.getView().setModel(modelo, "listaDosLivros")
+                            this.getView().setModel(modelo, nomeModelo)
                     })
             },
 
             aoPressionarLivro: function (oEvent) {
                 const nomeDaRota = "detalhes";
+                const propriedadeParaBusca = "id";
+                const modeloParaBusca = "listaDosLivros";
+                
                 let oItem = oEvent.getSource();
-                let id = window.encodeURIComponent(oItem.getBindingContext("listaDosLivros").getProperty('id'))
+                let id = window.encodeURIComponent(oItem.getBindingContext(modeloParaBusca).getProperty(propriedadeParaBusca))
                 this.NavegarPara(nomeDaRota, id)
             },
 
@@ -41,14 +45,17 @@ return Controller.extend("sap.ui.demo.walkthrough.controller.App", {
 
             aoFiltrarLivros: function (evento) {
                 const lista = "Lista";
-                const tituloDoLivro = "nome";
+                const parametroDeBusca = "nome";
+                const parametroDoEvento = "query";
+
                 let listaLivros = [];
-                let parametroPesquisa = evento.getParameter("query");
-                listaLivros.push(new Filter(tituloDoLivro, FilterOperator.Contains, parametroPesquisa));
+                let parametroPesquisa = evento.getParameter(parametroDoEvento);
+                listaLivros.push(new Filter(parametroDeBusca, FilterOperator.Contains, parametroPesquisa));
                 let listaDeLivros = this.byId(lista);
                 let oBinding = listaDeLivros.getBinding("items");
                 oBinding.filter(listaLivros);
             },
+
             NavegarPara: function(endPoint, idNavegacao){
                 let _servico = new Servicos();
                 _servico.NavegarParaRota.bind(this)(endPoint, idNavegacao)

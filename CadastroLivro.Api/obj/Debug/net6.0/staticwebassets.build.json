@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "zc/gj2qIG9ZnMMJf7uNAgQioIQ5Pg28PtdgPx9JCrJk=",
+  "Hash": "IAp9fkrvqjosFRz79IYDqxadGWCHGsX+n7vNkwbQ5/U=",
   "Source": "CadastroLivro.Api",
   "BasePath": "_content/CadastroLivro.Api",
   "Mode": "Default",
@@ -119,12 +119,12 @@
       "OriginalItemSpec": "wwwroot\\controller\\Repositorio.js"
     },
     {
-      "Identity": "C:\\Users\\Usuario\\Desktop\\CRUD\\CadastroLivro.Api\\wwwroot\\controller\\Servico.js",
+      "Identity": "C:\\Users\\Usuario\\Desktop\\CRUD\\CadastroLivro.Api\\wwwroot\\controller\\Servicos.js",
       "SourceId": "CadastroLivro.Api",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\Usuario\\Desktop\\CRUD\\CadastroLivro.Api\\wwwroot\\",
       "BasePath": "_content/CadastroLivro.Api",
-      "RelativePath": "controller/Servico.js",
+      "RelativePath": "controller/Servicos.js",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -133,7 +133,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\controller\\Servico.js"
+      "OriginalItemSpec": "wwwroot\\controller\\Servicos.js"
     },
     {
       "Identity": "C:\\Users\\Usuario\\Desktop\\CRUD\\CadastroLivro.Api\\wwwroot\\controller\\ValidarCampos.js",

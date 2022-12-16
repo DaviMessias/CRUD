@@ -28,7 +28,7 @@ sap.ui.define([
 		},
 
         EditarLivro : async function(livroASerEditado) {
-			await fetch(`https://localhost:7187/api/livro/${livroASerEditado.id}`, {
+			return await fetch(`https://localhost:7187/api/livro/${livroASerEditado.id}`, {
 				method: 'PUT',
 				headers: {
                     'Accept': 'application/json',
