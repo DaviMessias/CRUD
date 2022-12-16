@@ -16,30 +16,35 @@ sap.ui.define([
 		},
 
 		_aoCoincidirObjeto : function (oEvent) {
-			let idDoLivro = window.decodeURIComponent(oEvent.getParameter("arguments").id);
+			const parametroDoEvento = 'arguments';
+
+			let idDoLivro = window.decodeURIComponent(oEvent.getParameter(parametroDoEvento).id);
 				this.carregarLivroSelecionado(idDoLivro);
 		},
 
 		carregarLivroSelecionado : function(id){
+			const nomeModelo = "Livro";
+
 			let _repositorio = new Repositorio();
+
 			let livroRetornado = _repositorio.BuscarPorId(id);
 
 			livroRetornado.then(livroDoBanco => {
 			let livro = new JSONModel(livroDoBanco)
-				this.getView().setModel(livro, "Livro")
+				this.getView().setModel(livro, nomeModelo)
 			})
 		},
 
 		aoClicarEmBotaoVoltar: function () {
 			const nomeDaRota = "lista";
-			this.NavegarPara(nomeDaRota,null)
+			this.NavegarPara(nomeDaRota, null)
 		},
 
 		aoPressionarEditar : function(){
 			let idLivroASerEditado = this.getView().getModel("Livro").getData().id;
 			const nomeDaRota = "editar";
 
-			this.NavegarPara(nomeDaRota,idLivroASerEditado)
+			this.NavegarPara(nomeDaRota, idLivroASerEditado)
 		},
 
 		aoPressionarExcluir: function(){

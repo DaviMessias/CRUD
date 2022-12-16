@@ -6,8 +6,21 @@ sap.ui.define([
 
 	return ManagedObject.extend("sap.ui.demo.walkthrough.controller.ValidarCampos", {
 
+		validarCampos: function(arrayDeEntradas,dataRecebida){
+			let falha_Validacao = false;
+
+			arrayDeEntradas.forEach( entrada => {
+				falha_Validacao =  this.validarEntrada(entrada) || falha_Validacao;
+			});
+			falha_Validacao = this.validarData(dataRecebida) || falha_Validacao;
+
+			return falha_Validacao;
+			
+		},
+
 		validarData : function(dataRecebida){
-		
+			const textoDeStatusError="Data Inválida"
+			
 			let valorStatus = "None";
 			let falhaValidacao = false;
 			if (!dataRecebida.isValidValue() || dataRecebida.getValue() == ""){
@@ -15,7 +28,7 @@ sap.ui.define([
 				falhaValidacao = true;
 			}
 			dataRecebida.setValueState(valorStatus);
-			dataRecebida.setValueStateText("Data Inválida");
+			dataRecebida.setValueStateText(textoDeStatusError);
 			return falhaValidacao;
 			 
 		},
