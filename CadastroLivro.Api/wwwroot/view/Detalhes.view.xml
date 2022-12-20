@@ -22,12 +22,15 @@
 						value="{Livro>/id}" />
 					<DisplayListItem
 						label="{i18n>nome}"
+						value="{Livro>/nome}" />
+					<DisplayListItem
+						label="{i18n>autor}"
 						value="{Livro>/autor}" />
 					<DisplayListItem
-						label="Editora"
+						label="{i18n>editora}"
 						value="{Livro>/editora}" />
 					<DisplayListItem
-						label="Data de Publicação"
+						label="{i18n>data}"
 						value="{
 								path: 'Livro>/data',
 								type: 'sap.ui.model.type.Date',

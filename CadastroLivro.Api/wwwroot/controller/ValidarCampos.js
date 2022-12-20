@@ -4,7 +4,13 @@ sap.ui.define([
 ], function(ManagedObject) { 
 	"use strict";
 
-	return ManagedObject.extend("sap.ui.demo.walkthrough.controller.ValidarCampos", {
+	const caminhoValidarCampos ="sap.ui.demo.walkthrough.controller.ValidarCampos";
+	return ManagedObject.extend(caminhoValidarCampos, {
+		
+		_i18n:null,
+		definiri18n : function(modeloI18N){
+			this._i18n = modeloI18N;
+		},
 
 		validarCampos: function(arrayDeEntradas,dataRecebida){
 			let falha_Validacao = false;
@@ -15,11 +21,10 @@ sap.ui.define([
 			falha_Validacao = this.validarData(dataRecebida) || falha_Validacao;
 
 			return falha_Validacao;
-			
 		},
 
 		validarData : function(dataRecebida){
-			const textoDeStatusError="Data Inválida"
+			const erroData = this._i18n.getText("erroData.i18n")
 			
 			let valorStatus = "None";
 			let falhaValidacao = false;
@@ -28,31 +33,27 @@ sap.ui.define([
 				falhaValidacao = true;
 			}
 			dataRecebida.setValueState(valorStatus);
-			dataRecebida.setValueStateText(textoDeStatusError);
+			dataRecebida.setValueStateText(erroData);
 			return falhaValidacao;
-			 
 		},
 
-        validarEntrada: function (oInput) {
-
+        validarEntrada: function (entrada) {
 			let valorStatus = "None";
 			let falhaValidacao = false;
-			let oBinding = oInput.getBinding("value");
-            
+			let oBinding = entrada.getBinding("value");
 			try {
-				oBinding.getType().validateValue(oInput.getValue());
+				oBinding.getType().validateValue(entrada.getValue());
 					falhaValidacao = false;
 					valorStatus = "None";
-				
 			} catch (Exception) {
 				valorStatus = "Error";
 				falhaValidacao = true;
 			}
-			
-			oInput.setValueState(valorStatus);
+			entrada.setValueState(valorStatus);
 			return falhaValidacao;
-            
 		},
+		
+		
 	});
 });
 	

@@ -17,7 +17,8 @@
 				}">
 				<headerToolbar>
 							<Toolbar>
-									<Button type="Neutral" id="botaoCadastrar"  icon="sap-icon://add-coursebook" text="{i18n>botaoCadastrar.Cadastrar}" press=".aoClicarEmCadastrar" />
+									<Button type="Emphasized" id="botaoCadastrar"  icon="sap-icon://add-coursebook" 
+											text="{i18n>botaoCadastrar.Cadastrar}" press=".aoClicarEmCadastrar" />
 									<ToolbarSpacer/>
 									<SearchField width="50%" search=".aoFiltrarLivros"/>
 							</Toolbar>
