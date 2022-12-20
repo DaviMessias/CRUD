@@ -3,7 +3,8 @@ sap.ui.define([
 ], function(ManagedObject) {
     "use strict";
 
-    return ManagedObject.extend("sap.ui.demo.walkthrough.controller.Repositorio", {
+    const caminhoRepositorio = "sap.ui.demo.walkthrough.controller.Repositorio";
+    return ManagedObject.extend(caminhoRepositorio, {
 
         BuscarTodos : async function (){
             return await fetch('https://localhost:7187/api/livro/')
@@ -36,7 +37,7 @@ sap.ui.define([
 				},
 				body: JSON.stringify(livroASerEditado)
 			    })
-			.then((resposta) => resposta.json())
+			.then((resposta) => resposta.json());
         },
 
         DeletarLivro : async function(idLivroASerDeletado) {

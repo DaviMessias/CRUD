@@ -4,9 +4,11 @@ sap.ui.define([
  
  ], function(Controller,ResourceModel) {
      'use strict';
-     return Controller.extend("sap.ui.demo.walkthrough.controller.App",{
+
+     const caminhoApp= "sap.ui.demo.walkthrough.controller.App";
+     return Controller.extend(caminhoApp,{
+      
         onInit : function(){
-            // set i18n model on view
          let i18nModel = new ResourceModel({
             bundleName: "sap.ui.demo.walkthrough.i18n.i18n"
          });

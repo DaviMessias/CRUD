@@ -5,26 +5,35 @@
         "sap/ui/core/mvc/Controller",
 		"sap/ui/model/json/JSONModel",
 		"sap/m/MessageBox",
-	
 
-    ], function(Servicos,Repositorio,ValidarCampos,Controller, JSONModel, MessageBox ) {
+    ], function(Servicos, Repositorio, ValidarCampos, Controller, JSONModel, MessageBox) {
     "use strict";
-    
-    return Controller.extend("sap.ui.demo.walkthrough.controller.Cadastro", {
+	
+    const caminhoCadastro= "sap.ui.demo.walkthrough.controller.Cadastro";
+    return Controller.extend(caminhoCadastro, {
+		_servico: null,
+		_repositorio: null,
+		_validacao:null,
+
         onInit: function () {
+			const modelo= "i18n";
+			this.inicializarServicos();
+
+			let modeloI18N = this.getOwnerComponent().getModel(modelo).getResourceBundle();
+			this._validacao.definiri18n(modeloI18N);
+
 			let rotaDaView = sap.ui.core.UIComponent.getRouterFor(this);
 			rotaDaView.attachRoutePatternMatched(this._aoCoincidirObjeto, this);
 		},
 
 		_aoCoincidirObjeto : function (evento) {
 			const nomeDaRota = "editar";
-			let _servicos = new Servicos();
-			_servicos.definirDataValida.bind(this)()
-
-			this.limparCampos();
+			const nome = "name";
+			this._servico.definirDataValida.bind(this)();
+			this._servico.limparCampos.bind(this)();
 
 			let id;
-			let rotaPraEditar = evento.getParameter("name") == nomeDaRota;
+			let rotaPraEditar = evento.getParameter(nome) == nomeDaRota;
 			
 			rotaPraEditar
 				? (id = window.decodeURIComponent(evento.getParameter("arguments").id),
@@ -36,22 +45,22 @@
 			const nomeModelo = "Livro";
 			const idDataPicker = "DP6";
 			const idInputs = ["input-nome", "input-autor", "input-editora"];
-			const mensagemDeErroValidacao = "Ocorreu um erro de validação. Complete todos os campos primeiro.";
+			const mensagemDeErroValidacao = "erroAoSalvar.i18n";
+			const mensagemDeErroi18n = this.buscari18n(mensagemDeErroValidacao)
 
 			let livro = this.getView().getModel(nomeModelo).getData();
 			let dataInputada = this.getView().byId(idDataPicker);
-			let _validacao = new ValidarCampos();
 
-			let tela = this.getView(),
-				arrayDeEntradas = [ 
-				tela.byId(idInputs[0]),
-				tela.byId(idInputs[1]),
-				tela.byId(idInputs[2]),
-			]
-			let falha_Validacao = _validacao.validarCampos(arrayDeEntradas, dataInputada);
+			let arrayDeEntradas=[];
+			let tela= this.getView();
+			for(let i in idInputs){
+				arrayDeEntradas[i] = tela.byId(idInputs[i]);
+			}
+
+			let falha_Validacao = this._validacao.validarCampos(arrayDeEntradas, dataInputada);
 
 			if (falha_Validacao) {
-				MessageBox.alert(mensagemDeErroValidacao)
+				MessageBox.alert(mensagemDeErroi18n)
 				return;
 			}
 			
@@ -63,21 +72,17 @@
 		criarLivro: function (livroASerCriado){
 			const nomeDaRota = "detalhes";
 
-			let _repositorio = new Repositorio();
-			return _repositorio.CriarNovoLivro(livroASerCriado)
+			this._repositorio.CriarNovoLivro(livroASerCriado)
 				.then(livroCriado => 
-					this.navegarPara(nomeDaRota, livroCriado.id));
+					this._servico.NavegarParaRota.bind(this)(nomeDaRota, livroCriado.id));
 		},
 
 		editarLivro: function(livroASerEditado) {
 			const nomeDaRota = "detalhes";
-			let _repositorio = new Repositorio();
-			debugger
 
-			_repositorio.EditarLivro(livroASerEditado)
-				this.navegarPara(nomeDaRota, livroASerEditado.id);
+			this._repositorio.EditarLivro(livroASerEditado)
+				this._servico.NavegarParaRota.bind(this)(nomeDaRota, livroASerEditado.id);
 		},
-
 
 		_criarModeloDoLivro: function(){
 			const nomeModelo = "Livro";
@@ -94,64 +99,53 @@
 
 		carregarLivro: function(id){
 			const nomeModelo = 'Livro';
-			this.limparCampos();
-			let modeloLivro = new JSONModel();
 
-			let _repositorio = new Repositorio();
-			_repositorio.BuscarPorId(id)
-					.then(livroDoBanco => {
-					this.getView().setModel(modeloLivro = livroDoBanco, nomeModelo)
+			this._repositorio.BuscarPorId(id)
+				.then(livroDoBanco => {
+				this.getView().setModel(new JSONModel(livroDoBanco), nomeModelo)
 			})
 		},
-
 		
 		aoMudarData: function(evento) {
-			let _validacao = new ValidarCampos();
 			let dataInputada = evento.getSource();
-			_validacao.validarData(dataInputada);
+			this._validacao.validarData(dataInputada);
 		},
 
 		aoMudarEntrada: function(evento) {
-			let _validacao = new ValidarCampos();
 			let entrada = evento.getSource();
-			_validacao.validarEntrada(entrada);
-		},
-
-		limparCampos : function(){
-			const estadoDoCampo = "None"
-			const idInputs = ["input-nome","input-autor","input-editora","DP6"]
-
-			let tela = this.getView(),
-			arrayDeEntradas = [
-			tela.byId(idInputs[0]),
-			tela.byId(idInputs[1]),
-			tela.byId(idInputs[2]),
-			tela.byId(idInputs[3]),
-			]
-				arrayDeEntradas.forEach(element => element.setValueState(estadoDoCampo));
+			this._validacao.validarEntrada(entrada);
 		},
 
 		aoClicarEmVoltar: function(){
 			const nomeDaRota = "lista";
-
+			const mensagemMensageBox =  "mensagemAoClicarVoltar";
+			const tituloMensageBox = "tituloMensagemAoClicarVoltar";
+			
 			MessageBox.warning(
-				"As edições feitas neste livro não serão salvas.",
+				this.buscari18n(mensagemMensageBox),
 				{
-				title : "Sair da página?",
+				title : this.buscari18n(tituloMensageBox),
 				actions : [MessageBox.Action.CANCEL, MessageBox.Action.OK],
 				phasizedAction: MessageBox.Action.OK,
 				initialFocus: MessageBox.Action.CANCEL,
 				onClose: (oAction) => { 
 					if (oAction === "OK"){
-						this.navegarPara(nomeDaRota, null)
+						this._servico.NavegarParaRota.bind(this)(nomeDaRota, null)
+						}
 					}
-				}
 				});
 		},
 
-		navegarPara: function(endPoint, idNavegacao){			
-			let _servico = new Servicos();
-			_servico.NavegarParaRota.bind(this)(endPoint, idNavegacao);
+		buscari18n: function(chave) {
+			const modelo = "i18n";
+			let i18n = this.getView().getModel(modelo).getResourceBundle();
+			return i18n.getText(chave);
+		},
+
+		inicializarServicos: function(){
+			this._repositorio = new Repositorio();
+			this._servico = new Servicos();
+			this._validacao = new ValidarCampos();
 		},
 	});
 });

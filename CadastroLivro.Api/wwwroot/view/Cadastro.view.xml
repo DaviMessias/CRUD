@@ -9,21 +9,21 @@
 		showNavButton= "true"
 		navButtonPress= ".aoClicarEmVoltar">
 		<headerContent>
-			<Button type="Emphasized" text="Salvar" icon="sap-icon://save"  press=".aoPressionarSalvar" />
+			<Button type="Emphasized" text="{i18n>botaoSalvar.Salvar}" icon="sap-icon://save"  press=".aoPressionarSalvar" />
 		</headerContent>
 
 					<l:VerticalLayout class="sapUiContentPadding" width="30%">
-						<Label text="ID" labelFor="input-id" design="Bold"/>
+						<Label text="{i18n>id}" labelFor="input-id" design="Bold"/>
 						<Input id="input-id" required="true" blocked="true"
-									placeholder="Campo inacessível"
+									placeholder="{i18n>placeHolderID}"
 									value="{path : 'Livro>/id' }"  
 									/>
 
-						<Label text="Título" labelFor="input-nome" design="Bold"/>
+						<Label text="{i18n>nome}" labelFor="input-nome" design="Bold"/>
 						<Input id="input-nome" required="true"
-									placeholder="Digite o Título"
+									placeholder="{i18n>placeHolderNome}"
 									change="aoMudarEntrada" 
-									valueStateText="Insira um valor válido referente a título." 
+									valueStateText="{i18n>erroNome.i18n}" 
 									value="{
 												path : 'Livro>/nome',
 												type : 'sap.ui.model.type.String',
@@ -33,11 +33,11 @@
 													}
 											}" />
 
-						<Label text="Autor" labelFor="input-autor" design="Bold" />
+						<Label text="{i18n>autor}" labelFor="input-autor" design="Bold" />
 						<Input id="input-autor" required="true"
-								placeholder="Digite o Autor" 
+								placeholder="{i18n>placeHolderAutor}" 
 								change="aoMudarEntrada"
-								valueStateText="Insira um valor válido referente a autor." 
+								valueStateText="{i18n>erroAutor.i18n}" 
 								value="{
 										path : 'Livro>/autor',
 										type : 'sap.ui.model.type.String',
@@ -47,11 +47,11 @@
 											}
 									}" />
 
-						<Label text="Editora" labelFor="input-editora" design="Bold"/>
+						<Label text="{i18n>editora}" labelFor="input-editora" design="Bold"/>
 						<Input id="input-editora" required="true" 
-								placeholder="Digite a Editora" 
+								placeholder="{i18n>placeHolderEditora}" 
 								change="aoMudarEntrada"
-								valueStateText="Insira um valor válido referente a editora." 
+								valueStateText="{i18n>erroEditora.i18n}" 
 								value="{
 										path : 'Livro>/editora',
 										type : 'sap.ui.model.type.String',
@@ -61,7 +61,7 @@
 											}
 									}" />
 									
-						<Label text="Data de Publicação" required="true" design="Bold"/>
+						<Label text="{i18n>data}" required="true" design="Bold"/>
 						<DatePicker
 								value="{Livro>/data}"
 								valueFormat= "yyyy-MM-ddTHH:mm:ss"
