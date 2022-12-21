@@ -12,9 +12,11 @@ const caminhoLista= "sap.ui.demo.walkthrough.controller.Lista";
 return Controller.extend(caminhoLista, {
             _servico: null,
             onInit :  function () {
+                const nomeDaRota = "lista"
                 this._servico = new Servicos();
-                let rotaDaView = sap.ui.core.UIComponent.getRouterFor(this);
-			    rotaDaView.attachRoutePatternMatched(this._aoCoincidirObjeto, this);
+                
+                let rota = this.getOwnerComponent().getRouter();
+			    rota.getRoute(nomeDaRota).attachPatternMatched(this._aoCoincidirObjeto, this);
             },
 
             _aoCoincidirObjeto: function() {

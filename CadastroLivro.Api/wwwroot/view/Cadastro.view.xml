@@ -67,6 +67,7 @@
 								valueFormat= "yyyy-MM-ddTHH:mm:ss"
 								id="DP6"
 								displayFormat="short"
+								placeholder= "dd/mm/yyyy"
 								change="aoMudarData"
 								class="sapUiSmallMarginBottom"/>
 				</l:VerticalLayout>

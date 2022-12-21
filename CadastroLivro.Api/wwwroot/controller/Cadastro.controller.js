@@ -22,23 +22,9 @@
 			let modeloI18N = this.getOwnerComponent().getModel(modelo).getResourceBundle();
 			this._validacao.definiri18n(modeloI18N);
 
-			let rotaDaView = sap.ui.core.UIComponent.getRouterFor(this);
-			rotaDaView.attachRoutePatternMatched(this._aoCoincidirObjeto, this);
-		},
-
-		_aoCoincidirObjeto : function (evento) {
-			const nomeDaRota = "editar";
-			const nome = "name";
-			this._servico.definirDataValida.bind(this)();
-			this._servico.limparCampos.bind(this)();
-
-			let id;
-			let rotaPraEditar = evento.getParameter(nome) == nomeDaRota;
-			
-			rotaPraEditar
-				? (id = window.decodeURIComponent(evento.getParameter("arguments").id),
-				  this.carregarLivro(id))
-				: this._criarModeloDoLivro();
+			let rota = this.getOwnerComponent().getRouter();
+			rota.getRoute("cadastroDeLivros").attachPatternMatched(this._criarModeloDoLivro, this);
+			rota.getRoute("editar").attachPatternMatched(this.carregarLivro, this);
 		},
 		
 		aoPressionarSalvar: function () {
@@ -46,7 +32,7 @@
 			const idDataPicker = "DP6";
 			const idInputs = ["input-nome", "input-autor", "input-editora"];
 			const mensagemDeErroValidacao = "erroAoSalvar.i18n";
-			const mensagemDeErroi18n = this.buscari18n(mensagemDeErroValidacao)
+			const mensagemDeErroi18n = this.buscari18n(mensagemDeErroValidacao);
 
 			let livro = this.getView().getModel(nomeModelo).getData();
 			let dataInputada = this.getView().byId(idDataPicker);
@@ -58,12 +44,10 @@
 			}
 
 			let falha_Validacao = this._validacao.validarCampos(arrayDeEntradas, dataInputada);
-
 			if (falha_Validacao) {
 				MessageBox.alert(mensagemDeErroi18n)
 				return;
 			}
-			
 			livro.id
 				? this.editarLivro(livro)
 				: this.criarLivro(livro)
@@ -87,7 +71,9 @@
 		_criarModeloDoLivro: function(){
 			const nomeModelo = "Livro";
 			const stringVazia= "";
-			
+			this._servico.limparCampos.bind(this)();
+			this._servico.definirDataValida.bind(this)();
+
 			let modeloLivro = new JSONModel({
 				nome: stringVazia,
 				autor: stringVazia,
@@ -97,8 +83,11 @@
 			this.getView().setModel(modeloLivro, nomeModelo);
 		},
 
-		carregarLivro: function(id){
+		carregarLivro: function(evento){
 			const nomeModelo = 'Livro';
+			const id = window.decodeURIComponent(evento.getParameter("arguments").id);
+			this._servico.limparCampos.bind(this)();
+			this._servico.definirDataValida.bind(this)();
 
 			this._repositorio.BuscarPorId(id)
 				.then(livroDoBanco => {

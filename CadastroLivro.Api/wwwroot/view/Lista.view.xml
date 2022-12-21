@@ -3,65 +3,72 @@
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns:core="sap.ui.core"
 	xmlns:form="sap.ui.layout.form"
-	xmlns="sap.m">
-	<Page
-		title="{i18n>tituloTelaInicial}">
-			<Table 
-				id="Lista"
-				items="{
-				path: 'listaDosLivros>/',
-				sorter: {
-					path: 'autor',
-					group: true
-				}
-				}">
-				<headerToolbar>
-							<Toolbar>
-									<Button type="Emphasized" id="botaoCadastrar"  icon="sap-icon://add-coursebook" 
-											text="{i18n>botaoCadastrar.Cadastrar}" press=".aoClicarEmCadastrar" />
-									<ToolbarSpacer/>
-									<SearchField width="50%" search=".aoFiltrarLivros"/>
-							</Toolbar>
-				</headerToolbar>
-				<columns>
-				
-				<Column>
-					<Text text="{i18n>nome}"/>
-				</Column>
-				<Column>
-					<Text text="{i18n>editora}"/>
-				</Column>
-				<Column>
-					<Text text="{i18n>autor}"/>
-				</Column>
-				<Column>
-					<Text text="{i18n>data}"/>
-				</Column>
-			
-			</columns>
-				<items>
+	xmlns="sap.m"
+	displayBlock="true">
+	
+<Page
+		id="idPage"
+		title="{i18n>tituloTelaInicial}"
+		class= "sapUiResponsivePadding--header" >
+	<Panel 
+		accessibleRole="Region">
+					<Table 
+						id="Lista"
+						items="{
+						path: 'listaDosLivros>/',
+						sorter: {
+							path: 'autor',
+							group: true
+						}
+						}">
+						<headerToolbar>
+									<Toolbar>
+											<ToolbarSpacer/>
+											<SearchField width="47%" search=".aoFiltrarLivros"/>
+											<Button type="Emphasized" id="botaoCadastrar"  icon="sap-icon://add" 
+													press=".aoClicarEmCadastrar" tooltip="{i18n>botaoCadastrar.Cadastrar}" />
+									</Toolbar>
+						</headerToolbar>
+						<columns>
+						
+						<Column>
+							<Text text="{i18n>nome}"/>
+						</Column>
+						<Column>
+							<Text text="{i18n>editora}"/>
+						</Column>
+						<Column>
+							<Text text="{i18n>autor}"/>
+						</Column>
+						<Column>
+							<Text text="{i18n>data}"/>
+						</Column>
 					
-					<ColumnListItem
-						type="Navigation"
-						press="aoPressionarLivro">
-						<cells>
-							<Text text="{listaDosLivros>nome}"/>
-							<Text text="{listaDosLivros>editora}"/>
-							<Text text="{listaDosLivros>autor}"/>
-							<Text text="{
-								path: 'listaDosLivros>data',
-								type: 'sap.ui.model.type.Date',
-								formatOptions: {
-									style: 'short',
-									source: {
-										pattern: 'yyyy-MM-ddTHH:mm:ss'
-									}
-								}
-							}"
-							/>
-						</cells>
-					</ColumnListItem>
-				</items>
-			</Table>
-	</Page>
+					</columns>
+						<items>
+							
+							<ColumnListItem
+								type="Navigation"
+								press="aoPressionarLivro">
+								<cells>
+									<Text text="{listaDosLivros>nome}"/>
+									<Text text="{listaDosLivros>editora}"/>
+									<Text text="{listaDosLivros>autor}"/>
+									<Text text="{
+										path: 'listaDosLivros>data',
+										type: 'sap.ui.model.type.Date',
+										formatOptions: {
+											style: 'short',
+											source: {
+												pattern: 'yyyy-MM-ddTHH:mm:ss'
+											}
+										}
+									}"
+									/>
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+			</Panel>
+		</Page>
 </mvc:View>
